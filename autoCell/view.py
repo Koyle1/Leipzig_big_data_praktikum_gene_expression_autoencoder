@@ -6,15 +6,15 @@ import pandas as pd
 import anndata as ad
 
 
-
-class view():
+class View():
 
     def __init__(self):
         self.census = cellxgene_census.open_soma()
         gget.setup("cellxgene")
+        self.data = None
 
 
-    def fetch_data(self) -> ad.Anndata:
+    def fetch_data(self) -> None:
         '''
             Input:
             Output: dataframe
@@ -22,15 +22,28 @@ class view():
         '''
         cellxgene_census.get_anndata()
 
-    def build_pipeline(self) -> None:
+    def build_pipeline(self, steps: dict = {}) -> None:
+        '''
+            For future use -> Define Data Transformation with functions from pipeline steps
+        '''
         pass
 
     def execute_pipeline(self) -> None:
+        '''
+            For future use -> Execute the pipeline build with build_pipeline
+        '''
         pass
 
-
-    def load_view() -> view:
+    
+    @classmethod
+    def load_view():
+        '''
+            Load view from saved data
+        '''
         pass
 
     def save_view() -> None:
+        '''
+            Save view for future use
+        '''
         pass
