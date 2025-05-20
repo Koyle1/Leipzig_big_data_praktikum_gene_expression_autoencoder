@@ -2,6 +2,7 @@ import cellxgene_census
 import scanpy as sc
 import numpy as np
 import gget
+import magic
 
 import scanpy.pp as pp # for preprocessing
 
@@ -37,7 +38,7 @@ def main():
     parser.add_argument("--magic", action="store_true", help="Apply MAGIC imputation (requires magic package)")
 
     #Save options
-    parser.add_argument("--save_name", type=str, default=None, help="Name of the save file")
+    parser.add_argument("--save_name", type=str, default="data", help="Name of the save file")
     
     args = parser.parse_args()
 
@@ -52,16 +53,54 @@ def main():
     #Preprocessing
     if args.filter_cells_min_genes:
         pp.filter_cells(adata, min_genes=args.filter_cells_min_genes)
+        
     if args.filter_genes_min_cells:
         pp.filter_genes(adata, min_cells=args.filter_genes_min_cells)
     
     if args.num_genes is not None:
         pp.highly_variable_genes(adata, n_top_genes= args.num_genes, subset=True)
 
-    
-    #Save the extracted data
+    if args.subsample:
+        pp.subsample(adata, fraction=args.subsample)
+        
+    if args.downsample_counts:
+        pp.downsample_counts(adata, counts_per_cell=args.downsample_counts)
+        
+    if args.num_genes:
+        pp.highly_variable_genes(adata, n_top_genes=args.num_genes, subset=True)
+        
+    if args.normalize:
+        pp.normalize_total(adata, target_sum=1e4)
+        
+    if args.log1p:
+        pp.log1p(adata)
+        
+    elif args.sqrt:
+        pp.sqrt(adata)
+        
+    if args.regress_out:
+        pp.regress_out(adata, args.regress_out)
+        
+    if args.scale:
+        pp.scale(adata)
 
-    return 1
+    if args.run_pca:
+        pp.pca(adata, n_comps=args.n_pcs)
+
+    if args.run_neighbors:
+        pp.neighbors(adata, n_pcs=args.n_pcs)
+
+    if args.combat:
+        if "batch" not in adata.obs:
+            raise ValueError("ComBat requires 'batch' column in adata.obs.")
+        pp.combat(adata, key="batch")
+
+    if args.magic:
+        adata = magic.MAGIC().fit_transform(adata)
+        
+    #Save the extracted data
+    adata.write(args.save_name + ".h5ad")
+    print("Data saved to 'processed_data.h5ad'")
 
 if __name__ == "__main__":
     main()
