@@ -16,9 +16,9 @@ def main():
 
     #Data Options
     parser.add_argument("--species", type=str, default="Homo sapiens", help="Specify the species of the organism")
-    parser.add_argument("--cell_type", type=str, default=None, help="Specify the cell type")
+    parser.add_argument("--cell_type", type=str, default="Neuron", help="Specify the cell type")
     parser.add_argument("--sex", type=str, default=None, help="Choose the sex of the cell donor")
-    parser.add_argument("--disease", type=str, default=None, help="Choose the desease of the target")
+    parser.add_argument("--disease", type=str, default="COVID-19", help="Choose the desease of the target")
 
     # Preprocessing options
     parser.add_argument("--num_genes", type=int, default=None, help="Top N highly variable genes to keep")
@@ -44,10 +44,11 @@ def main():
 
     #Data Extraction
     adata = gget.cellxgene(
-        species = args.species,
-        cell_type= args.cell_type,
-        disease= args.disease,
-        sex = args.sex,
+        species = "homo_sapiens",
+        disease= ["lung_cancer"],
+        tissue="lung",
+        meta_only=True,
+        #dataset_id="e04daea4-4412-45b5-989e-76a9be070a89"
     )
 
     #Preprocessing
@@ -99,7 +100,13 @@ def main():
         adata = magic.MAGIC().fit_transform(adata)
         
     #Save the extracted data
-    adata.write(args.save_name + ".h5ad")
+    adata.to_csv('file1.csv')
+    print(adata.describe())
+    print(adata.head())
+    print(adata.size)
+    print(f"N normal cells {adata[adata['disease']=="normal"].size}")
+    print(f"N cancer cells {adata[adata['disease']=="lung cancer"].size}")
+    #adata.write(args.save_name + ".h5ad")
     print("Data saved to 'processed_data.h5ad'")
 
 if __name__ == "__main__":
