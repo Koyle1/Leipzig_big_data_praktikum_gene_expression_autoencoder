@@ -24,6 +24,7 @@ with cellxgene_census.open_soma() as census:
     ids_list = ids.tolist()
     ids_str = "[" + ",".join(str(i) for i in ids_list) + "]"
 
+    print("indices sampled, starting download...")
 
     adata = cellxgene_census.get_anndata(
         census = census,
@@ -32,7 +33,8 @@ with cellxgene_census.open_soma() as census:
         obs_column_names=["tissue", "disease"],
     )
 
-    pp.filter_genes_dispersion(adata)
-    pp.highly_variable_genes(adata, n_top_genes=50, subset=True)
+    print("download finished")
+    # pp.filter_genes_dispersion(adata)
+    # pp.highly_variable_genes(adata, n_top_genes=50, subset=True)
     
     adata.write("data.h5ad")

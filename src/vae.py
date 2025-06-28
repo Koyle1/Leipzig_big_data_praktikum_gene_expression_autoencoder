@@ -48,7 +48,7 @@ class CellVAE(nn.Module):
         """Implementation of the "reparameterization trick".
         """
         if logvar is None:
-            logvar = 1.0
+            logvar = torch.ones_like(mu)
 
         std = torch.exp(0.5 * logvar)
         epsilon = torch.randn_like(mu)
@@ -67,13 +67,6 @@ class CellVAE(nn.Module):
         z = self.reparameterize(mu, logvar)
         return self.decode(z), mu, logvar
 
-model = CellVAE()
-optimizer = optim.Adam(model.parameters(), lr=1e-3)
-device = torch.device("cpu")
-train_loader = torch
-
-print(f"Using device: {device}")
-
 def elbo_loss_function(recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor, logvar: torch.Tensor, beta: float=1.0):
     if logvar is None:
         logvar = torch.ones_like(mu)
@@ -84,16 +77,3 @@ def elbo_loss_function(recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor,
     KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
 
     return BCE + beta * KLD
-
-def train(epoch):
-    model.train()
-    train_loss = 0
-    for batch_idx, (data, _) in enumerate(train_loader):
-        data = data.to(device)
-        recon_batch, mu, logvar = model(data)
-        loss = elbo_loss_function(recon_batch, data, mu, logvar)
-        loss.backward()
-        train_loss += loss.item()
-        optimizer.step()
-        # TODO: Log
-
