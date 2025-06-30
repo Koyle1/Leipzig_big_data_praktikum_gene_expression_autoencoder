@@ -124,15 +124,15 @@ class SingleCellDataset(Dataset):
         if hasattr(X, 'todense'):
             X = X.todense()
         
+        if self.log_transform:
+            X = np.log1p(X + 1)
+
         if self.normalize:
             # Normalize by max counts per cell
             max_counts = np.array(X.max(axis=1)).flatten()
-            # Avoid division by zero
-            max_counts[max_counts == 0] = 1
+            # Avoid division by zero -> not needed when adding one in the log transform
+            if not self.log_transform: max_counts[max_counts == 0] = 1
             X = X / max_counts[:, np.newaxis] * self.scale_factor
-            
-        if self.log_transform:
-            X = np.log1p(X)
             
         # Update the AnnData object
         self.adata.X = X

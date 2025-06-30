@@ -7,17 +7,20 @@ import wandb
 
 def main():
     n_epochs = 5000
-    batch_size = 16
+    batch_size = 32
     data_file_path = "data.h5ad"
+    n_data_samples = 1000
     learning_rate = 0.001
     scale_factor = 1.0
     latent_dim = 10
     use_variance = False
     beta = 1.0
+    tau0 = torch.Tensor([1.0])
     model_save_path = "model.pth"
     torch_device = "cpu"
     verbose = True
     log_interval = 5
+    save_interval = 5
     # TODO add random seed
 
     # Initialize tracking
@@ -27,17 +30,17 @@ def main():
         config={
             "learning_rate": learning_rate,
             "dataset": data_file_path,
+            "n_data_samples": n_data_samples,
             "epochs": n_epochs,
             "latent_dim": latent_dim,
             "batch_size": batch_size,
             "use_variance": use_variance,
             "vae-beta": beta
-
         }
     )
 
     # Load Data
-    dataset = SingleCellDataset(file_path=data_file_path, cell_subset=[i for i in range(1000)], log_transform=True, normalize=True, scale_factor=scale_factor)
+    dataset = SingleCellDataset(file_path=data_file_path, cell_subset=[i for i in range(n_data_samples)], log_transform=True, normalize=True, scale_factor=scale_factor)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
     # Define Model
@@ -52,8 +55,8 @@ def main():
         train_loss = 0
         for batch_idx, data, in enumerate(dataloader):
             data = data.to(device)
-            recon_batch, mu, logvar = model(data)
-            loss = elbo_loss_function(recon_batch, data, mu, logvar)
+            (recon_batch, dropout_probs), mu, logvar = model(data, tau0)
+            loss, BCE, KLD = elbo_loss_function(recon_batch, data, mu, logvar, beta=beta)
             loss.backward()
             train_loss += loss.item()
             optimizer.step()
@@ -65,7 +68,15 @@ def main():
 
         avg_loss = train_loss / len(dataloader.dataset)
         if verbose: print(f"Train Epoch: {epoch} Average Loss: {avg_loss}")
-        run.log({"step_avg_loss": avg_loss})
+        run.log({
+                "step_avg_loss": avg_loss,
+                "binary_cross_entropy": BCE,
+                "KL_divergence": KLD,
+                "mean_dropout_probability": dropout_probs.mean()
+            })
+
+        if epoch % save_interval == 0:
+            torch.save(model.policy.state_dict(), model_save_path)
 
     run.finish()
 
