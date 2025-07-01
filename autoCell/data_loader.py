@@ -131,7 +131,8 @@ class SingleCellDataset(Dataset):
             # Normalize by max counts per cell
             max_counts = np.array(X.max(axis=1)).flatten()
             # Avoid division by zero -> not needed when adding one in the log transform
-            if not self.log_transform: max_counts[max_counts == 0] = 1
+            # if not self.log_transform: 
+            max_counts[max_counts == 0] = 1
             X = X / max_counts[:, np.newaxis] * self.scale_factor
             
         # Update the AnnData object

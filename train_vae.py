@@ -1,5 +1,6 @@
 from src.vae import CellVAE, elbo_loss_function
 from autoCell.data_loader import SingleCellDataset
+# from autoCell.data_loader_sequential import BatchedSingleCellDataset
 import torch
 from torch.utils.data import DataLoader
 from torch.optim import RMSprop
@@ -7,7 +8,7 @@ import wandb
 
 def main():
     n_epochs = 5000
-    batch_size = 32
+    batch_size = 4
     data_file_path = "data.h5ad"
     n_data_samples = 1000
     learning_rate = 0.001
@@ -39,14 +40,34 @@ def main():
         }
     )
 
+    # Set torch device
+    device = torch.device(torch_device)
+    tau0 = tau0.to(device)
+
     # Load Data
     dataset = SingleCellDataset(file_path=data_file_path, cell_subset=[i for i in range(n_data_samples)], log_transform=True, normalize=True, scale_factor=scale_factor)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    # dataset = BatchedSingleCellDataset(
+    #     file_path=data_file_path,
+    #     cell_subset=[i for i in range(n_data_samples)],
+    #     batch_size=batch_size,
+    #     cache_size=400,
+    #     log_transform=True,
+    #     normalize=True,
+    #     scale_factor=scale_factor,
+    # )
+    # dataloader = DataLoader(
+    #     dataset,
+    #     batch_size=batch_size,
+    #     shuffle=True,num_workers=4,
+    #     pin_memory=torch.cuda.is_available()
+    # )
+
 
     # Define Model
     model = CellVAE(input_dim=dataset.n_genes, latent_dim=10, use_variance=use_variance)
+    model = model.to(device)
     optimizer = RMSprop(model.parameters(), lr=learning_rate)
-    device = torch.device(torch_device)
 
 
     if verbose: print("Starting training...")
@@ -70,9 +91,9 @@ def main():
         if verbose: print(f"Train Epoch: {epoch} Average Loss: {avg_loss}")
         run.log({
                 "step_avg_loss": avg_loss,
-                "binary_cross_entropy": BCE,
-                "KL_divergence": KLD,
-                "mean_dropout_probability": dropout_probs.mean()
+                "binary_cross_entropy": BCE.item(),
+                "KL_divergence": KLD.item(),
+                "mean_dropout_probability": dropout_probs.mean().item()
             })
 
         if epoch % save_interval == 0:
