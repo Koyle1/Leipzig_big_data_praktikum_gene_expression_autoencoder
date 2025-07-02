@@ -9,7 +9,7 @@ class CellVAE(nn.Module):
     def __init__(self, input_dim: int=512, latent_dim: int=10, use_variance: bool=False):
         super().__init__()
         self.encoder = nn.Sequential(
-            nn.Dropout(0.5),
+            # nn.Dropout(0.5),
             nn.Linear(in_features=input_dim, out_features=512),
             nn.ReLU(),
             nn.Linear(in_features=512, out_features=128),
@@ -35,13 +35,25 @@ class CellVAE(nn.Module):
             nn.Linear(in_features=512, out_features=input_dim),
             nn.Sigmoid()
         )
+        for m in self.modules():
+            if isinstance(m, nn.Linear):
+                nn.init.xavier_uniform_(m.weight)
+                m.bias.data.fill_(0.01)
+
+
     def encode(self, x: torch.Tensor):
         encoding_raw = self.encoder.forward(x)
         mu = self.z_mean.forward(encoding_raw)
         if self.z_logvar is not None:
             logvar = self.z_logvar.forward(encoding_raw)
+            # numerical stability TODO does not appear to work
+            # logvar = torch.clamp(logvar, 0.1, 20)
         else:
             logvar = None
+
+        # numerical stability TODO does not appear to work
+        # mu = torch.where(mu < 0.000001, torch.zeros_like(mu) + 0.1, mu)
+        
         return mu, logvar
 
     def reparameterize(self, mu: torch.Tensor, logvar: torch.Tensor=None):
@@ -124,9 +136,9 @@ class CellVAE(nn.Module):
         reconstructed = self.decoder.forward(x)
 
         # Apply learned Gumbel-Softmax dropout
-        masked_output, dropout_probs = self.learned_gumbel_dropout(reconstructed, temperature)
+        # masked_output, dropout_probs = self.learned_gumbel_dropout(reconstructed, temperature)
         
-        return masked_output, dropout_probs
+        return reconstructed, None
 
     def forward(self, x, temperature: torch.Tensor):
         mu, logvar = self.encode(x)
@@ -146,4 +158,25 @@ def elbo_loss_function(recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor,
     # 0.5 * sum(1 + log(sigma^2) - mu^2 - sigma^2)
     KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
 
+    return BCE + beta * KLD, BCE, KLD
+
+def elbo_loss_function_normalized(recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor, logvar: torch.Tensor, beta: float=1.0):
+    """Uses mean reduction as opposed to summing in the original VAE paper
+
+    TODO: evaluate mean vs sum reduction
+    """
+    batch_size = x.size(0)
+
+    if logvar is None:
+        logvar = torch.ones_like(mu)
+    
+    # Reconstruction loss (normalized by input dimension)
+    BCE = F.binary_cross_entropy(recon_x, x, reduction='sum') / x.numel()
+    
+    # KL divergence (normalized by latent dimension and batch size)
+
+    KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp(), dim=-1) / batch_size
+    KLD = KLD.mean() 
+    # KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp()) / (batch_size * mu.size(1))
+    
     return BCE + beta * KLD, BCE, KLD
