@@ -4,6 +4,8 @@ from autoCell.data_loader import SingleCellDataset
 import torch
 from torch.utils.data import DataLoader
 from torch.optim import RMSprop
+import numpy as np
+import random
 import wandb
 
 def main():
@@ -11,18 +13,21 @@ def main():
     batch_size = 10
     data_file_path = "data.h5ad"
     n_data_samples = 100
-    learning_rate = 0.001
+    learning_rate = 1e-6
     scale_factor = 1.0
     latent_dim = 2
     use_variance = True
-    beta = 0.001
+    beta = 1
     tau0 = torch.Tensor([1.0])
     model_save_path = "model.pth"
     torch_device = "cpu"
     verbose = True
     log_interval = 5
     save_interval = 5
-    # TODO add random seed
+    torch.manual_seed(42)
+    np.random.seed(42)
+    random.seed(42)
+
 
     # Initialize tracking
     run = wandb.init(
@@ -76,8 +81,8 @@ def main():
     if verbose: print("Starting training...")
     for epoch in range(1, n_epochs + 1):
         # simple beta annealing
-        # beta_anneal = min(beta, epoch / 10000)
-        beta_anneal = beta
+        beta_anneal = min(beta, epoch / 1000)
+        # beta_anneal = beta
 
 
         model.train()
@@ -115,7 +120,13 @@ def main():
             })
 
         if epoch % save_interval == 0:
+            print("last means")
             print(mu.detach().numpy())
+            print("last logvars")
+            print(logvar.detach().numpy())
+            print("last z values")
+            print(model.last_z.numpy())
+            print("last grads")
             for name, param in model.named_parameters():
                     if param.grad is not None:
                         grad_mean = param.grad.mean().item()

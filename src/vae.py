@@ -58,6 +58,7 @@ class CellVAE(nn.Module):
 
     def reparameterize(self, mu: torch.Tensor, logvar: torch.Tensor=None):
         """Implementation of the "reparameterization trick".
+        Allowing unit variance if desired.
         """
         if logvar is None:
             logvar = torch.ones_like(mu)
@@ -143,6 +144,7 @@ class CellVAE(nn.Module):
     def forward(self, x, temperature: torch.Tensor):
         mu, logvar = self.encode(x)
         z = self.reparameterize(mu, logvar)
+        self.last_z = z.detach()
         return self.decode(z, temperature), mu, logvar
 
 def elbo_loss_function(recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor, logvar: torch.Tensor, beta: float=1.0):
@@ -157,6 +159,10 @@ def elbo_loss_function(recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor,
 
     # 0.5 * sum(1 + log(sigma^2) - mu^2 - sigma^2)
     KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+
+    # free bits:
+    # KLD_per_dim = -0.5 * 1 + logvar - mu.pow(2) - logvar.exp()
+    # KLD = torch.sum(torch.maximum(KLD_per_dim, torch.full_like(KLD_per_dim, 0.2)))
 
     return BCE + beta * KLD, BCE, KLD
 

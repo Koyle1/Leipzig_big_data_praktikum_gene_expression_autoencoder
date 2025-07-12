@@ -47,7 +47,6 @@ class SingleCellDataset(Dataset):
         self.obs_keys = obs_keys or []
         self.var_keys = var_keys or []
         self.transform = transform
-        self.log_transform = log_transform
         self.normalize = normalize
         self.scale_factor = scale_factor
         self.return_labels = return_labels
@@ -123,6 +122,8 @@ class SingleCellDataset(Dataset):
         # Convert to dense if sparse
         if hasattr(X, 'todense'):
             X = X.todense()
+
+        
         
         if self.log_transform:
             X = np.log1p(X + 1)
