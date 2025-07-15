@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=3
+#SBATCH --mem=32G
+#SBATCH --job-name=test
+#SBATCH --gres=gpu:1
+#SBATCH --partition=paula
+#SBATCH --time=04:00:00  # max running time
+
+module load Anaconda3
+
+source activate cell-vae
+
+conda run -n cell-vae python inspect_data.py

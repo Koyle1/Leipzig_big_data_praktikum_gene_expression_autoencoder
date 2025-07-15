@@ -1,0 +1,196 @@
+[2025-07-14 02:34:08] Starting SLURM job 14905031 on clara10.sc.uni-leipzig.de
+[2025-07-14 02:34:08] Job parameters: 4 tasks, 4 GPUs, 1 nodes
+[2025-07-14 02:34:08] Loading required modules...
+[2025-07-14 02:34:10] Activating conda environment...
+[2025-07-14 02:34:11] Verifying environment...
+Python 3.10.18
+PyTorch version: 2.7.1+cu126
+CUDA available: True
+CUDA devices: 4
+[2025-07-14 02:34:20] Checking training script...
+[2025-07-14 02:34:20] Training script found: -rw-r--r-- 1 ci72buri sc_users 16826 Jul 14 02:34 train_vae.py
+[2025-07-14 02:34:20] Testing training script import...
+Training script import: SUCCESS
+[2025-07-14 02:34:28] Checking required modules...
+torch: OK
+torch.distributed: OK
+numpy: OK
+wandb: OK
+All required modules available
+[2025-07-14 02:34:32] Configuring NCCL settings...
+[2025-07-14 02:34:32] Setting up distributed training configuration...
+[2025-07-14 02:34:32] Distributed training configuration:
+[2025-07-14 02:34:32]   MASTER_ADDR: 172.26.10.10
+[2025-07-14 02:34:32]   MASTER_PORT: 36655
+[2025-07-14 02:34:32]   WORLD_SIZE: 4
+[2025-07-14 02:34:32]   NODE_RANK: 0
+[2025-07-14 02:34:32]   SLURM_GPUS_ON_NODE: 4
+[2025-07-14 02:34:32]   SLURM_JOB_NUM_NODES: 1
+[2025-07-14 02:34:32] Testing network connectivity...
+PING 172.26.10.10 (172.26.10.10) 56(84) bytes of data.
+64 bytes from 172.26.10.10: icmp_seq=1 ttl=64 time=0.058 ms
+
+--- 172.26.10.10 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.058/0.058/0.058/0.000 ms
+[2025-07-14 02:34:32] Testing GPU availability...
+Mon Jul 14 02:34:32 2025       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.230.02             Driver Version: 535.230.02   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:05:00.0 Off |                  N/A |
+|  0%   27C    P8              21W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   1  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:43:00.0 Off |                  N/A |
+|  0%   24C    P8               1W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   2  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:44:00.0 Off |                  N/A |
+|  0%   24C    P8              14W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   3  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:64:00.0 Off |                  N/A |
+|  0%   25C    P8               1W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+[2025-07-14 02:34:32] Checking torchrun availability...
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/torchrun
+usage: torchrun [-h] [--nnodes NNODES] [--nproc-per-node NPROC_PER_NODE] [--rdzv-backend RDZV_BACKEND] [--rdzv-endpoint RDZV_ENDPOINT] [--rdzv-id RDZV_ID] [--rdzv-conf RDZV_CONF] [--standalone]
+                [--max-restarts MAX_RESTARTS] [--monitor-interval MONITOR_INTERVAL] [--start-method {spawn,fork,forkserver}] [--role ROLE] [-m] [--no-python] [--run-path] [--log-dir LOG_DIR] [-r REDIRECTS] [-t TEE]
+                [--local-ranks-filter LOCAL_RANKS_FILTER] [--node-rank NODE_RANK] [--master-addr MASTER_ADDR] [--master-port MASTER_PORT] [--local-addr LOCAL_ADDR] [--logs-specs LOGS_SPECS]
+                training_script ...
+
+[2025-07-14 02:34:35] Testing basic torchrun functionality...
+Basic torchrun test passed
+[2025-07-14 02:34:42] Creating distributed test script...
+[2025-07-14 02:34:42] Testing distributed functionality...
+Rank 1/2: Distributed initialization successfulRank 0/2: Distributed initialization successful
+
+Rank 0: Using device cuda:0
+Rank 1: Using device cuda:1
+Rank 1: Basic tensor operations successful
+Rank 0: Basic tensor operations successful
+Rank 1: Test completed successfully
+Rank 0: Test completed successfully
+[2025-07-14 02:34:49] Starting distributed training with verbose output...
+[2025-07-14 02:34:49] Command: torchrun --nproc_per_node=4 --nnodes=1 --node_rank=0 --rdzv_backend=c10d --rdzv_endpoint=172.26.10.10:36655 train_vae.py
+[2025-07-14 02:34:49] Testing with 2 processes first...
+[W714 02:34:51.334960257 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:36655 (errno: 97 - Address family not supported by protocol).
+[W714 02:34:51.515497064 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:36695 (errno: 97 - Address family not supported by protocol).
+[W714 02:34:57.561982414 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:36695 (errno: 97 - Address family not supported by protocol).
+[W714 02:34:57.626709949 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:36695 (errno: 97 - Address family not supported by protocol).
+2025-07-14 02:34:57,895 - rank_0 - INFO - Rank 0/2 initialized on device cuda:0
+wandb: Currently logged in as: coyfelix7 (coyfelix7-universit-t-leipzig) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+Using VAE-optimized preprocessing...
+wandb: Tracking run with wandb version 0.21.0
+wandb: Run data is saved locally in /home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/wandb/run-20250714_023458-tn9e9rls
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run absurd-rain-164
+wandb: ⭐️ View project at https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae
+wandb: 🚀 View run at https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae/runs/tn9e9rls
+Using VAE-optimized preprocessing...
+Dataset loaded: 20000 cells × 100 genes
+Dataset loaded: 20000 cells × 100 genes
+/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/autoCell/data_loader.py:152: ImplicitModificationWarning: Modifying `X` on a view results in data being overridden
+  self.adata.X = X
+/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/autoCell/data_loader.py:152: ImplicitModificationWarning: Modifying `X` on a view results in data being overridden
+  self.adata.X = X
+Dataset loaded: 20000 cells × 100 genes
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 484, in <module>
+[rank1]:     main()
+[rank1]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 371, in main
+[rank1]:     train_loader, val_loader = create_data_loaders(config, rank, world_size)
+[rank1]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 315, in create_data_loaders
+[rank1]:     train_loader = DataLoader(
+[rank1]:   File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 282, in __init__
+[rank1]:     raise ValueError("persistent_workers option needs num_workers > 0")
+[rank1]: ValueError: persistent_workers option needs num_workers > 0
+Dataset loaded: 20000 cells × 100 genes
+2025-07-14 02:35:09,953 - rank_0 - ERROR - Training failed with error: persistent_workers option needs num_workers > 0
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 371, in main
+    train_loader, val_loader = create_data_loaders(config, rank, world_size)
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 315, in create_data_loaders
+    train_loader = DataLoader(
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 282, in __init__
+    raise ValueError("persistent_workers option needs num_workers > 0")
+ValueError: persistent_workers option needs num_workers > 0
+W0714 02:35:10.077000 2634245 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 2634257 closing signal SIGTERM
+wandb: uploading summary, console lines 0-13
+wandb:                                                                                
+wandb: 🚀 View run absurd-rain-164 at: https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae/runs/tn9e9rls
+wandb: ⭐️ View project at: https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20250714_023458-tn9e9rls/logs
+[W714 02:35:11.983349381 ProcessGroupNCCL.cpp:1479] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 484, in <module>
+    main()
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 371, in main
+    train_loader, val_loader = create_data_loaders(config, rank, world_size)
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 315, in create_data_loaders
+    train_loader = DataLoader(
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 282, in __init__
+    raise ValueError("persistent_workers option needs num_workers > 0")
+ValueError: persistent_workers option needs num_workers > 0
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 484, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 371, in main
+[rank0]:     train_loader, val_loader = create_data_loaders(config, rank, world_size)
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 315, in create_data_loaders
+[rank0]:     train_loader = DataLoader(
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 282, in __init__
+[rank0]:     raise ValueError("persistent_workers option needs num_workers > 0")
+[rank0]: ValueError: persistent_workers option needs num_workers > 0
+E0714 02:35:13.095000 2634245 site-packages/torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 1) local_rank: 1 (pid: 2634258) of binary: /home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/python3.10
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in main
+    run(args)
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/run.py", line 883, in run
+    elastic_launch(
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 139, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 270, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_vae.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-07-14_02:35:10
+  host      : clara10.sc.uni-leipzig.de
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 2634258)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+[2025-07-14 02:35:13] Training exit code: 0
+[2025-07-14 02:35:13] Training completed successfully
+[2025-07-14 02:35:13] Saving system state for debugging...
+[2025-07-14 02:35:13] Debug files created: debug_env_vars.txt, debug_python_libs.txt, debug_gpu_state.txt
+[2025-07-14 02:35:13] Job completed with exit code 0
+Cleaning up...
+Cleanup completed

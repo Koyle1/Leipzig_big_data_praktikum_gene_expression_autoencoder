@@ -1,0 +1,55 @@
+W0713 16:14:59.346000 1466753 site-packages/torch/distributed/run.py:766] 
+W0713 16:14:59.346000 1466753 site-packages/torch/distributed/run.py:766] *****************************************
+W0713 16:14:59.346000 1466753 site-packages/torch/distributed/run.py:766] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0713 16:14:59.346000 1466753 site-packages/torch/distributed/run.py:766] *****************************************
+[W713 16:14:59.247988177 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:41518 (errno: 97 - Address family not supported by protocol).
+[W713 16:14:59.319011356 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:40129 (errno: 97 - Address family not supported by protocol).
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 15, in <module>
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 15, in <module>
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 15, in <module>
+Traceback (most recent call last):
+        from autocell.data_loader import SingleCellDataset  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 15, in <module>
+from autocell.data_loader import SingleCellDataset
+
+ModuleNotFoundErrorModuleNotFoundError: : No module named 'autocell'No module named 'autocell'
+
+    from autocell.data_loader import SingleCellDataset
+ModuleNotFoundError: No module named 'autocell'
+    from autocell.data_loader import SingleCellDataset
+ModuleNotFoundError: No module named 'autocell'
+W0713 16:15:03.849000 1466753 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 1466903 closing signal SIGTERM
+W0713 16:15:03.850000 1466753 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 1466905 closing signal SIGTERM
+W0713 16:15:03.850000 1466753 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 1466906 closing signal SIGTERM
+E0713 16:15:03.914000 1466753 site-packages/torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 1) local_rank: 1 (pid: 1466904) of binary: /home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/python3.10
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in main
+    run(args)
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/run.py", line 883, in run
+    elastic_launch(
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 139, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 270, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_vae.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-07-13_16:15:03
+  host      : clara10.sc.uni-leipzig.de
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 1466904)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

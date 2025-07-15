@@ -1,0 +1,6 @@
+slurmstepd: error: *** JOB 14912025 ON clara08 CANCELLED AT 2025-07-14T12:30:22 ***
+Traceback (most recent call last):
+  File "<string>", line 5, in <module>
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/./train_vae.py", line 21, in <module>
+    import psutil
+ModuleNotFoundError: No module named 'psutil'

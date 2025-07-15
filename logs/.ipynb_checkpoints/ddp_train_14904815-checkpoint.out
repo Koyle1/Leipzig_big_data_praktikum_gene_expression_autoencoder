@@ -1,0 +1,95 @@
+[W714 01:08:24.826620033 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara11.sc.uni-leipzig.de]:44641 (errno: 97 - Address family not supported by protocol).
+[W714 01:08:24.134154859 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara11.sc.uni-leipzig.de]:41669 (errno: 97 - Address family not supported by protocol).
+[W714 01:08:33.968187758 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara11.sc.uni-leipzig.de]:41669 (errno: 97 - Address family not supported by protocol).
+[W714 01:08:33.968230758 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara11.sc.uni-leipzig.de]:41669 (errno: 97 - Address family not supported by protocol).
+[W714 01:08:33.968236998 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara11.sc.uni-leipzig.de]:41669 (errno: 97 - Address family not supported by protocol).
+[W714 01:08:33.968554169 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara11.sc.uni-leipzig.de]:41669 (errno: 97 - Address family not supported by protocol).
+wandb: Currently logged in as: coyfelix7 (coyfelix7-universit-t-leipzig) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.21.0
+wandb: Run data is saved locally in /home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/wandb/run-20250714_010834-akcriejq
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run polished-butterfly-159
+wandb: ⭐️ View project at https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae
+wandb: 🚀 View run at https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae/runs/akcriejq
+Using VAE-optimized preprocessing...
+Using VAE-optimized preprocessing...
+Using VAE-optimized preprocessing...
+Using VAE-optimized preprocessing...
+Dataset loaded: 20000 cells × 100 genes
+Dataset loaded: 20000 cells × 100 genes
+Dataset loaded: 20000 cells × 100 genes
+Dataset loaded: 20000 cells × 100 genes
+/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/autoCell/data_loader.py:152: ImplicitModificationWarning: Modifying `X` on a view results in data being overridden
+  self.adata.X = X
+/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/autoCell/data_loader.py:152: ImplicitModificationWarning: Modifying `X` on a view results in data being overridden
+  self.adata.X = X
+/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/autoCell/data_loader.py:152: ImplicitModificationWarning: Modifying `X` on a view results in data being overridden
+  self.adata.X = X
+/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/autoCell/data_loader.py:152: ImplicitModificationWarning: Modifying `X` on a view results in data being overridden
+  self.adata.X = X
+Dataset loaded: 20000 cells × 100 genes
+Dataset loaded: 20000 cells × 100 genes
+Dataset loaded: 20000 cells × 100 genes
+Dataset loaded: 20000 cells × 100 genes
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 168, in <module>
+    train()
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 118, in train
+    model = DDP(model, device_ids=[device.index])
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 835, in __init__
+    _verify_param_shape_across_processes(self.process_group, parameters)
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/utils.py", line 282, in _verify_param_shape_across_processes
+    return dist._verify_params_across_processes(process_group, tensors, logger)
+torch.distributed.DistBackendError: NCCL error in: /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2817, invalid usage (run with NCCL_DEBUG=WARN for details), NCCL version 2.26.2
+ncclInvalidUsage: This usually reflects invalid usage of NCCL library.
+Last error:
+Bootstrap : no socket interface found
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 168, in <module>
+[rank0]:     train()
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 118, in train
+[rank0]:     model = DDP(model, device_ids=[device.index])
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 835, in __init__
+[rank0]:     _verify_param_shape_across_processes(self.process_group, parameters)
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/utils.py", line 282, in _verify_param_shape_across_processes
+[rank0]:     return dist._verify_params_across_processes(process_group, tensors, logger)
+[rank0]: torch.distributed.DistBackendError: NCCL error in: /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2817, invalid usage (run with NCCL_DEBUG=WARN for details), NCCL version 2.26.2
+[rank0]: ncclInvalidUsage: This usually reflects invalid usage of NCCL library.
+[rank0]: Last error:
+[rank0]: Bootstrap : no socket interface found
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mpolished-butterfly-159[0m at: [34mhttps://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae/runs/akcriejq[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20250714_010834-akcriejq/logs[0m
+W0714 01:08:50.917000 3205583 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3205595 closing signal SIGTERM
+W0714 01:08:50.918000 3205583 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3205596 closing signal SIGTERM
+W0714 01:08:50.919000 3205583 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3205597 closing signal SIGTERM
+E0714 01:08:51.297000 3205583 site-packages/torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 1) local_rank: 0 (pid: 3205594) of binary: /home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/python3.10
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in main
+    run(args)
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/run.py", line 883, in run
+    elastic_launch(
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 139, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 270, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_vae.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-07-14_01:08:50
+  host      : clara11.sc.uni-leipzig.de
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 3205594)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

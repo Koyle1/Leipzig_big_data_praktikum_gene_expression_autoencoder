@@ -1,0 +1,1426 @@
+MASTER_ADDR is 172.18.62.11
+PING 172.18.62.11 (172.18.62.11) 56(84) bytes of data.
+64 bytes from 172.18.62.11: icmp_seq=1 ttl=64 time=0.042 ms
+
+--- 172.18.62.11 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.042/0.042/0.042/0.000 ms
+W0715 01:56:45.371000 90944 site-packages/torch/distributed/run.py:766] 
+W0715 01:56:45.371000 90944 site-packages/torch/distributed/run.py:766] *****************************************
+W0715 01:56:45.371000 90944 site-packages/torch/distributed/run.py:766] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0715 01:56:45.371000 90944 site-packages/torch/distributed/run.py:766] *****************************************
+[W715 01:56:45.331892713 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:53566 (errno: 97 - Address family not supported by protocol).
+[W715 01:56:45.639607665 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:45881 (errno: 97 - Address family not supported by protocol).
+[W715 01:56:50.138511594 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:45881 (errno: 97 - Address family not supported by protocol).
+[W715 01:56:50.138854620 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:45881 (errno: 97 - Address family not supported by protocol).
+[W715 01:56:50.138873465 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:45881 (errno: 97 - Address family not supported by protocol).
+[W715 01:56:50.138931775 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:45881 (errno: 97 - Address family not supported by protocol).
+wandb: Currently logged in as: coyfelix7 (coyfelix7-universit-t-leipzig) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+Using VAE-optimized preprocessing...
+Using VAE-optimized preprocessing...
+Using VAE-optimized preprocessing...
+wandb: Tracking run with wandb version 0.21.0
+wandb: Run data is saved locally in /home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/wandb/run-20250715_015651-kvldgc5b
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run apricot-dragon-217
+wandb: ⭐️ View project at https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae
+wandb: 🚀 View run at https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae/runs/kvldgc5b
+Using VAE-optimized preprocessing...
+[W715 01:56:54.718509326 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:45881 (errno: 97 - Address family not supported by protocol).
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Using VAE-optimized preprocessing...
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+paula11:90971:90971 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90971:90971 [0] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:90971:90971 [0] NCCL INFO cudaDriverVersion 12020
+paula11:90971:90971 [0] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:90971:90971 [0] NCCL INFO Comm config Blocking set to 1
+paula11:90974:90974 [3] NCCL INFO cudaDriverVersion 12020
+paula11:90974:90974 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90974:90974 [3] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:90974:90974 [3] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:90974:90974 [3] NCCL INFO Comm config Blocking set to 1
+paula11:90973:90973 [2] NCCL INFO cudaDriverVersion 12020
+paula11:90973:90973 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90973:90973 [2] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:90973:90973 [2] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:90972:90972 [1] NCCL INFO cudaDriverVersion 12020
+paula11:90972:90972 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90972:90972 [1] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:90972:90972 [1] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:90973:90973 [2] NCCL INFO Comm config Blocking set to 1
+paula11:90972:90972 [1] NCCL INFO Comm config Blocking set to 1
+paula11:90974:91090 [3] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:90974:91090 [3] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:90974:91090 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90974:91090 [3] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:90974:91090 [3] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:90974:91090 [3] NCCL INFO Using network Socket
+paula11:90974:91090 [3] NCCL INFO ncclCommInitRankConfig comm 0x55b6e8550e30 rank 3 nranks 5 cudaDev 3 nvmlDev 3 busId 81000 commId 0x338bb0712a3ebba2 - Init START
+paula11:90972:91092 [1] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:90972:91092 [1] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:90972:91092 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90972:91092 [1] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:90973:91091 [2] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:90973:91091 [2] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:90973:91091 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90971:91089 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:90971:91089 [0] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:90971:91089 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90973:91091 [2] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:90971:91089 [0] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:90972:91092 [1] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:90972:91092 [1] NCCL INFO Using network Socket
+paula11:90973:91091 [2] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:90973:91091 [2] NCCL INFO Using network Socket
+paula11:90972:91092 [1] NCCL INFO ncclCommInitRankConfig comm 0x56506038ddf0 rank 1 nranks 5 cudaDev 1 nvmlDev 1 busId 41000 commId 0x338bb0712a3ebba2 - Init START
+paula11:90971:91089 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:90971:91089 [0] NCCL INFO Using network Socket
+paula11:90973:91091 [2] NCCL INFO ncclCommInitRankConfig comm 0x55a0eb2ce500 rank 2 nranks 5 cudaDev 2 nvmlDev 2 busId 61000 commId 0x338bb0712a3ebba2 - Init START
+paula11:90971:91089 [0] NCCL INFO ncclCommInitRankConfig comm 0x556302e115f0 rank 0 nranks 5 cudaDev 0 nvmlDev 0 busId 22000 commId 0x338bb0712a3ebba2 - Init START
+paula11:90972:91092 [1] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+paula11:90973:91091 [2] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+paula11:90975:90975 [4] NCCL INFO cudaDriverVersion 12020
+paula11:90975:90975 [4] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90975:90975 [4] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:90975:90975 [4] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:90975:90975 [4] NCCL INFO Comm config Blocking set to 1
+paula11:90975:91097 [4] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:90975:91097 [4] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:90975:91097 [4] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:90975:91097 [4] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:90975:91097 [4] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:90975:91097 [4] NCCL INFO Using network Socket
+paula11:90975:91097 [4] NCCL INFO ncclCommInitRankConfig comm 0x55ab83318480 rank 4 nranks 5 cudaDev 4 nvmlDev 4 busId e1000 commId 0x338bb0712a3ebba2 - Init START
+paula11:90971:91089 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+paula11:90974:91090 [3] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+paula11:90975:91097 [4] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+paula11:90974:91090 [3] NCCL INFO Bootstrap timings total 1.986421 (create 0.000033, send 0.023352, recv 1.959945, ring 0.000503, delay 0.000000)
+paula11:90973:91091 [2] NCCL INFO Bootstrap timings total 1.973441 (create 0.000026, send 0.018382, recv 0.000181, ring 1.952159, delay 0.000000)
+paula11:90971:91089 [0] NCCL INFO Bootstrap timings total 1.972015 (create 0.000032, send 0.000184, recv 0.015967, ring 0.000758, delay 0.000009)
+paula11:90975:91097 [4] NCCL INFO Bootstrap timings total 0.023746 (create 0.000034, send 0.019693, recv 0.000225, ring 0.000128, delay 0.000000)
+paula11:90972:91092 [1] NCCL INFO Bootstrap timings total 1.975148 (create 0.000032, send 0.019111, recv 0.001058, ring 1.952379, delay 0.000000)
+paula11:90974:91090 [3] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:90974:91090 [3] NCCL INFO Setting affinity for GPU 3 to 01ff0000,00000000,00000000,00000000
+paula11:90971:91089 [0] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:90974:91090 [3] NCCL INFO NVLS multicast support is not available on dev 3
+paula11:90972:91092 [1] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:90973:91091 [2] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:90971:91089 [0] NCCL INFO Setting affinity for GPU 0 to 01,00000000
+paula11:90975:91097 [4] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:90972:91092 [1] NCCL INFO Setting affinity for GPU 1 to 010000
+paula11:90971:91089 [0] NCCL INFO NVLS multicast support is not available on dev 0
+paula11:90973:91091 [2] NCCL INFO Setting affinity for GPU 2 to 01
+paula11:90972:91092 [1] NCCL INFO NVLS multicast support is not available on dev 1
+paula11:90975:91097 [4] NCCL INFO Setting affinity for GPU 4 to 0fe1,00000000,00000000
+paula11:90973:91091 [2] NCCL INFO NVLS multicast support is not available on dev 2
+paula11:90975:91097 [4] NCCL INFO NVLS multicast support is not available on dev 4
+paula11:90975:91097 [4] NCCL INFO comm 0x55ab83318480 rank 4 nRanks 5 nNodes 1 localRanks 5 localRank 4 MNNVL 0
+paula11:90974:91090 [3] NCCL INFO comm 0x55b6e8550e30 rank 3 nRanks 5 nNodes 1 localRanks 5 localRank 3 MNNVL 0
+paula11:90973:91091 [2] NCCL INFO comm 0x55a0eb2ce500 rank 2 nRanks 5 nNodes 1 localRanks 5 localRank 2 MNNVL 0
+paula11:90971:91089 [0] NCCL INFO comm 0x556302e115f0 rank 0 nRanks 5 nNodes 1 localRanks 5 localRank 0 MNNVL 0
+paula11:90972:91092 [1] NCCL INFO comm 0x56506038ddf0 rank 1 nRanks 5 nNodes 1 localRanks 5 localRank 1 MNNVL 0
+paula11:90975:91097 [4] NCCL INFO Trees [0] -1/-1/-1->4->3 [1] -1/-1/-1->4->3
+paula11:90974:91090 [3] NCCL INFO Trees [0] 4/-1/-1->3->2 [1] 4/-1/-1->3->2
+paula11:90975:91097 [4] NCCL INFO P2P Chunksize set to 131072
+paula11:90973:91091 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1
+paula11:90974:91090 [3] NCCL INFO P2P Chunksize set to 131072
+paula11:90971:91089 [0] NCCL INFO Channel 00/02 : 0 1 2 3 4
+paula11:90973:91091 [2] NCCL INFO P2P Chunksize set to 131072
+paula11:90972:91092 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0
+paula11:90971:91089 [0] NCCL INFO Channel 01/02 : 0 1 2 3 4
+paula11:90972:91092 [1] NCCL INFO P2P Chunksize set to 131072
+paula11:90971:91089 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+paula11:90971:91089 [0] NCCL INFO P2P Chunksize set to 131072
+paula11:90971:91089 [0] NCCL INFO Check P2P Type intraNodeP2pSupport 0 directMode 0
+paula11:90974:91104 [3] NCCL INFO [Proxy Service] Device 3 CPU core 120
+paula11:90975:91110 [4] NCCL INFO [Proxy Service] Device 4 CPU core 72
+paula11:90974:91106 [3] NCCL INFO [Proxy Service UDS] Device 3 CPU core 120
+paula11:90975:91113 [4] NCCL INFO [Proxy Service UDS] Device 4 CPU core 75
+paula11:90974:91090 [3] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:90974:91090 [3] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:90973:91091 [2] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:90973:91091 [2] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:90972:91092 [1] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:90972:91092 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:90975:91097 [4] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:90975:91097 [4] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:90971:91089 [0] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:90971:91089 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:90971:91089 [0] NCCL INFO CC Off, workFifoBytes 1048576
+paula11:90974:91090 [3] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:90974:91090 [3] NCCL INFO ncclCommInitRankConfig comm 0x55b6e8550e30 rank 3 nranks 5 cudaDev 3 nvmlDev 3 busId 81000 commId 0x338bb0712a3ebba2 - Init COMPLETE
+paula11:90974:91090 [3] NCCL INFO Init timings - ncclCommInitRankConfig: rank 3 nranks 5 total 2.20 (kernels 0.11, alloc 0.00, bootstrap 1.99, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:90975:91097 [4] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:90975:91097 [4] NCCL INFO ncclCommInitRankConfig comm 0x55ab83318480 rank 4 nranks 5 cudaDev 4 nvmlDev 4 busId e1000 commId 0x338bb0712a3ebba2 - Init COMPLETE
+paula11:90975:91097 [4] NCCL INFO Init timings - ncclCommInitRankConfig: rank 4 nranks 5 total 0.23 (kernels 0.11, alloc 0.00, bootstrap 0.02, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:90972:91092 [1] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:90972:91092 [1] NCCL INFO ncclCommInitRankConfig comm 0x56506038ddf0 rank 1 nranks 5 cudaDev 1 nvmlDev 1 busId 41000 commId 0x338bb0712a3ebba2 - Init COMPLETE
+paula11:90972:91092 [1] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 5 total 2.19 (kernels 0.12, alloc 0.00, bootstrap 1.98, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:90973:91091 [2] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:90971:91089 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:90973:91091 [2] NCCL INFO ncclCommInitRankConfig comm 0x55a0eb2ce500 rank 2 nranks 5 cudaDev 2 nvmlDev 2 busId 61000 commId 0x338bb0712a3ebba2 - Init COMPLETE
+paula11:90971:91089 [0] NCCL INFO ncclCommInitRankConfig comm 0x556302e115f0 rank 0 nranks 5 cudaDev 0 nvmlDev 0 busId 22000 commId 0x338bb0712a3ebba2 - Init COMPLETE
+paula11:90973:91091 [2] NCCL INFO Init timings - ncclCommInitRankConfig: rank 2 nranks 5 total 2.20 (kernels 0.12, alloc 0.01, bootstrap 1.97, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:90971:91089 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 5 total 2.21 (kernels 0.14, alloc 0.01, bootstrap 1.97, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:90971:91111 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 32
+paula11:90972:91112 [1] NCCL INFO [Proxy Service UDS] Device 1 CPU core 16
+paula11:90971:91107 [0] NCCL INFO [Proxy Service] Device 0 CPU core 32
+paula11:90973:91109 [2] NCCL INFO [Proxy Service UDS] Device 2 CPU core 0
+paula11:90972:91108 [1] NCCL INFO [Proxy Service] Device 1 CPU core 16
+paula11:90973:91105 [2] NCCL INFO [Proxy Service] Device 2 CPU core 0
+paula11:90975:91114 [4] NCCL INFO Channel 00 : 4[4] -> 0[0] via SHM/direct/direct
+paula11:90975:91114 [4] NCCL INFO Channel 01 : 4[4] -> 0[0] via SHM/direct/direct
+paula11:90974:91116 [3] NCCL INFO Channel 00 : 3[3] -> 4[4] via SHM/direct/direct
+paula11:90974:91116 [3] NCCL INFO Channel 01 : 3[3] -> 4[4] via SHM/direct/direct
+paula11:90971:91115 [0] NCCL INFO Channel 00 : 0[0] -> 1[1] via SHM/direct/direct
+paula11:90972:91118 [1] NCCL INFO Channel 00 : 1[1] -> 2[2] via SHM/direct/direct
+paula11:90973:91117 [2] NCCL INFO Channel 00 : 2[2] -> 3[3] via SHM/direct/direct
+paula11:90971:91115 [0] NCCL INFO Channel 01 : 0[0] -> 1[1] via SHM/direct/direct
+paula11:90972:91118 [1] NCCL INFO Channel 01 : 1[1] -> 2[2] via SHM/direct/direct
+paula11:90973:91117 [2] NCCL INFO Channel 01 : 2[2] -> 3[3] via SHM/direct/direct
+paula11:90975:91114 [4] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+paula11:90974:91116 [3] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+paula11:90973:91117 [2] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+paula11:90971:91115 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+paula11:90972:91118 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 1] Time: 1.24s | Loss: 0.1496 | Value RMSE: 0.0154 | Sparsity Loss: 0.1341 | Sparsity Acc: 0.1400  | KLD: 0.0753
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 2] Time: 0.07s | Loss: 0.1312 | Value RMSE: 0.0096 | Sparsity Loss: 0.1213 | Sparsity Acc: 0.1543  | KLD: 0.2140
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 3] Time: 0.05s | Loss: 0.1220 | Value RMSE: 0.0162 | Sparsity Loss: 0.1051 | Sparsity Acc: 0.1543  | KLD: 0.3974
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 4] Time: 0.06s | Loss: 0.1142 | Value RMSE: 0.0110 | Sparsity Loss: 0.1028 | Sparsity Acc: 0.1542  | KLD: 0.1844
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 5] Time: 0.05s | Loss: 0.1094 | Value RMSE: 0.0101 | Sparsity Loss: 0.0989 | Sparsity Acc: 0.1545  | KLD: 0.2673
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 6] Time: 0.05s | Loss: 0.1075 | Value RMSE: 0.0096 | Sparsity Loss: 0.0974 | Sparsity Acc: 0.1548  | KLD: 0.2975
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 1] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Epoch 7] Time: 0.05s | Loss: 0.1050 | Value RMSE: 0.0083 | Sparsity Loss: 0.0963 | Sparsity Acc: 0.1553  | KLD: 0.2832
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 8] Time: 0.06s | Loss: 0.1040 | Value RMSE: 0.0080 | Sparsity Loss: 0.0955 | Sparsity Acc: 0.1554  | KLD: 0.3381
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 9] Time: 0.06s | Loss: 0.1027 | Value RMSE: 0.0070 | Sparsity Loss: 0.0952 | Sparsity Acc: 0.1559  | KLD: 0.3077
+Epoch 10, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+Epoch 10, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+Epoch 10, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+Epoch 10, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 10] Time: 0.06s | Loss: 0.1020 | Value RMSE: 0.0071 | Sparsity Loss: 0.0943 | Sparsity Acc: 0.1557  | KLD: 0.4023
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 11] Time: 0.06s | Loss: 0.1014 | Value RMSE: 0.0069 | Sparsity Loss: 0.0940 | Sparsity Acc: 0.1559  | KLD: 0.3732
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Epoch 12] Time: 0.05s | Loss: 0.0998 | Value RMSE: 0.0060 | Sparsity Loss: 0.0931 | Sparsity Acc: 0.1565  | KLD: 0.4508
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 13] Time: 0.06s | Loss: 0.0998 | Value RMSE: 0.0066 | Sparsity Loss: 0.0925 | Sparsity Acc: 0.1565  | KLD: 0.5099
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 3] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 14] Time: 0.05s | Loss: 0.0988 | Value RMSE: 0.0059 | Sparsity Loss: 0.0921 | Sparsity Acc: 0.1567  | KLD: 0.4828
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 15] Time: 0.06s | Loss: 0.0987 | Value RMSE: 0.0060 | Sparsity Loss: 0.0919 | Sparsity Acc: 0.1566  | KLD: 0.5765
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 16] Time: 0.06s | Loss: 0.0982 | Value RMSE: 0.0057 | Sparsity Loss: 0.0917 | Sparsity Acc: 0.1568  | KLD: 0.5629
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 17] Time: 0.06s | Loss: 0.0983 | Value RMSE: 0.0058 | Sparsity Loss: 0.0915 | Sparsity Acc: 0.1568  | KLD: 0.6329
+[Rank 4] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Epoch 18] Time: 0.06s | Loss: 0.0979 | Value RMSE: 0.0053 | Sparsity Loss: 0.0916 | Sparsity Acc: 0.1566  | KLD: 0.6256
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.[Rank 2] Model forward completed.[Rank 3] Model forward completed.
+
+
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 19] Time: 0.05s | Loss: 0.0973 | Value RMSE: 0.0055 | Sparsity Loss: 0.0909 | Sparsity Acc: 0.1572  | KLD: 0.6466
+Epoch 20, batch size: 1000
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+Epoch 20, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+Epoch 20, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+Epoch 20, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 20] Time: 0.05s | Loss: 0.0968 | Value RMSE: 0.0050 | Sparsity Loss: 0.0908 | Sparsity Acc: 0.1569  | KLD: 0.7025
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 21] Time: 0.06s | Loss: 0.0963 | Value RMSE: 0.0052 | Sparsity Loss: 0.0901 | Sparsity Acc: 0.1573  | KLD: 0.6841
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 22] Time: 0.05s | Loss: 0.0967 | Value RMSE: 0.0051 | Sparsity Loss: 0.0906 | Sparsity Acc: 0.1567  | KLD: 0.7071
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Epoch 23] Time: 0.05s | Loss: 0.0961 | Value RMSE: 0.0048 | Sparsity Loss: 0.0901 | Sparsity Acc: 0.1571  | KLD: 0.7748
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 24] Time: 0.06s | Loss: 0.0960 | Value RMSE: 0.0046 | Sparsity Loss: 0.0903 | Sparsity Acc: 0.1571  | KLD: 0.7577
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 25] Time: 0.05s | Loss: 0.0963 | Value RMSE: 0.0047 | Sparsity Loss: 0.0904 | Sparsity Acc: 0.1568  | KLD: 0.7482
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+
+[Epoch 26] Time: 0.06s | Loss: 0.0959 | Value RMSE: 0.0047 | Sparsity Loss: 0.0900 | Sparsity Acc: 0.1569  | KLD: 0.7610
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 27] Time: 0.05s | Loss: 0.0957 | Value RMSE: 0.0046 | Sparsity Loss: 0.0899 | Sparsity Acc: 0.1570  | KLD: 0.7683
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Epoch 28] Time: 0.05s | Loss: 0.0960 | Value RMSE: 0.0042 | Sparsity Loss: 0.0905 | Sparsity Acc: 0.1567  | KLD: 0.8353
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Epoch 29] Time: 0.06s | Loss: 0.0950 | Value RMSE: 0.0042 | Sparsity Loss: 0.0895 | Sparsity Acc: 0.1571  | KLD: 0.8627
+Epoch 30, batch size: 1000
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+Epoch 30, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+
+Epoch 30, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.[Rank 1] Model forward completed.
+
+
+Epoch 30, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Epoch 30] Time: 0.05s | Loss: 0.0956 | Value RMSE: 0.0043 | Sparsity Loss: 0.0901 | Sparsity Acc: 0.1569  | KLD: 0.7853
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 31] Time: 0.05s | Loss: 0.0949 | Value RMSE: 0.0044 | Sparsity Loss: 0.0893 | Sparsity Acc: 0.1572  | KLD: 0.8217
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 32] Time: 0.05s | Loss: 0.0949 | Value RMSE: 0.0043 | Sparsity Loss: 0.0893 | Sparsity Acc: 0.1574  | KLD: 0.8773
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 33] Time: 0.05s | Loss: 0.0946 | Value RMSE: 0.0042 | Sparsity Loss: 0.0891 | Sparsity Acc: 0.1573  | KLD: 0.8578
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 34] Time: 0.06s | Loss: 0.0949 | Value RMSE: 0.0042 | Sparsity Loss: 0.0894 | Sparsity Acc: 0.1573  | KLD: 0.8705
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 35] Time: 0.05s | Loss: 0.0949 | Value RMSE: 0.0042 | Sparsity Loss: 0.0895 | Sparsity Acc: 0.1570  | KLD: 0.8524
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+
+[Epoch 36] Time: 0.05s | Loss: 0.0950 | Value RMSE: 0.0041 | Sparsity Loss: 0.0896 | Sparsity Acc: 0.1572  | KLD: 0.9002
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 37] Time: 0.05s | Loss: 0.0943 | Value RMSE: 0.0038 | Sparsity Loss: 0.0891 | Sparsity Acc: 0.1573  | KLD: 0.9404
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 38] Time: 0.05s | Loss: 0.0946 | Value RMSE: 0.0041 | Sparsity Loss: 0.0891 | Sparsity Acc: 0.1574  | KLD: 0.9033
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 39] Time: 0.05s | Loss: 0.0945 | Value RMSE: 0.0041 | Sparsity Loss: 0.0891 | Sparsity Acc: 0.1572  | KLD: 0.9018
+Epoch 40, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+Epoch 40, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+Epoch 40, batch size: 1000
+[Rank 4] Model forward completed.[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+Epoch 40, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 40] Time: 0.05s | Loss: 0.0946 | Value RMSE: 0.0040 | Sparsity Loss: 0.0892 | Sparsity Acc: 0.1572  | KLD: 0.9240
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 2] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 2] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 41] Time: 0.05s | Loss: 0.0944 | Value RMSE: 0.0040 | Sparsity Loss: 0.0889 | Sparsity Acc: 0.1574  | KLD: 0.9756
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Epoch 42] Time: 0.05s | Loss: 0.0946 | Value RMSE: 0.0037 | Sparsity Loss: 0.0895 | Sparsity Acc: 0.1572  | KLD: 0.9374
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Epoch 43] Time: 0.06s | Loss: 0.0940 | Value RMSE: 0.0039 | Sparsity Loss: 0.0887 | Sparsity Acc: 0.1575  | KLD: 0.9385
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Epoch 44] Time: 0.06s | Loss: 0.0939 | Value RMSE: 0.0039 | Sparsity Loss: 0.0885 | Sparsity Acc: 0.1577  | KLD: 0.9511
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 45] Time: 0.05s | Loss: 0.0943 | Value RMSE: 0.0040 | Sparsity Loss: 0.0889 | Sparsity Acc: 0.1572  | KLD: 0.9507
+[Rank 2] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 46] Time: 0.05s | Loss: 0.0936 | Value RMSE: 0.0039 | Sparsity Loss: 0.0882 | Sparsity Acc: 0.1579  | KLD: 0.9761
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 4] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Epoch 47] Time: 0.05s | Loss: 0.0937 | Value RMSE: 0.0039 | Sparsity Loss: 0.0883 | Sparsity Acc: 0.1578  | KLD: 0.9810
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 48] Time: 0.05s | Loss: 0.0943 | Value RMSE: 0.0035 | Sparsity Loss: 0.0893 | Sparsity Acc: 0.1572  | KLD: 1.0139
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Epoch 49] Time: 0.05s | Loss: 0.0936 | Value RMSE: 0.0036 | Sparsity Loss: 0.0884 | Sparsity Acc: 0.1579  | KLD: 1.0283
+Epoch 50, batch size: 1000
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+Epoch 50, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 3] Model forward completed.
+Epoch 50, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+Epoch 50, batch size: 1000
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 50] Time: 0.05s | Loss: 0.0939 | Value RMSE: 0.0038 | Sparsity Loss: 0.0886 | Sparsity Acc: 0.1576  | KLD: 0.9743
+[Rank 3] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Epoch 51] Time: 0.05s | Loss: 0.0933 | Value RMSE: 0.0038 | Sparsity Loss: 0.0880 | Sparsity Acc: 0.1581  | KLD: 1.0006
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.[Rank 0] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Epoch 52] Time: 0.05s | Loss: 0.0932 | Value RMSE: 0.0038 | Sparsity Loss: 0.0878 | Sparsity Acc: 0.1584  | KLD: 1.0397
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.[Rank 1] Model forward completed.
+
+
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 4] Model forward completed.[Rank 2] Model forward completed.
+
+
+[Rank 3] Model forward completed.
+[Epoch 53] Time: 0.05s | Loss: 0.0940 | Value RMSE: 0.0036 | Sparsity Loss: 0.0887 | Sparsity Acc: 0.1578  | KLD: 1.1234
+[Rank 4] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.[Rank 4] Model forward completed.
+
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 0] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 54] Time: 0.06s | Loss: 0.0928 | Value RMSE: 0.0035 | Sparsity Loss: 0.0877 | Sparsity Acc: 0.1585  | KLD: 1.0097
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 0] Model forward completed.[Rank 1] Model forward completed.
+
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 3] Model forward completed.
+[Epoch 55] Time: 0.05s | Loss: 0.0930 | Value RMSE: 0.0040 | Sparsity Loss: 0.0875 | Sparsity Acc: 0.1587  | KLD: 1.0443
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 2] Model forward completed.[Rank 3] Model forward completed.
+
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Epoch 56] Time: 0.05s | Loss: 0.0928 | Value RMSE: 0.0040 | Sparsity Loss: 0.0872 | Sparsity Acc: 0.1589  | KLD: 1.0821
+[Rank 3] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 2] Model forward completed.
+[Rank 1] Model forward completed.
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.
+[Rank 0] Model forward completed.
+[Rank 1] Model forward completed.[Rank 2] Model forward completed.
+
+[Rank 4] Model forward completed.
+[Rank 3] Model forward completed.[Rank 0] Model forward completed.
+
+[Epoch 57] Time: 0.05s | Loss: 0.0930 | Value RMSE: 0.0040 | Sparsity Loss: 0.0873 | Sparsity Acc: 0.1589  | KLD: 1.1171

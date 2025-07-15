@@ -1,0 +1,8 @@
+job_id: 14904994
+nodes: 1
+gpus_per_node: 8
+total_gpus: 4
+master_addr: 172.18.62.12
+master_port: 25633
+start_time: 2025-07-14T02:10:47+02:00
+slurm_partition: paula

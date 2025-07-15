@@ -1,0 +1,78 @@
+[2025-07-14 01:57:21] Starting SLURM job 14904996 on clara11.sc.uni-leipzig.de
+[2025-07-14 01:57:21] Job parameters: 4 tasks, 8 GPUs, 1 nodes
+[2025-07-14 01:57:21] Loading required modules...
+[2025-07-14 01:57:22] Activating conda environment...
+[2025-07-14 01:57:23] Verifying environment...
+Python 3.10.18
+PyTorch version: 2.7.1+cu126
+CUDA available: True
+CUDA devices: 8
+[2025-07-14 01:57:32] Configuring NCCL settings...
+[2025-07-14 01:57:32] Setting up distributed training configuration...
+[2025-07-14 01:57:32] Distributed training configuration:
+[2025-07-14 01:57:32]   MASTER_ADDR: 172.26.10.11
+[2025-07-14 01:57:32]   MASTER_PORT: 39673
+[2025-07-14 01:57:32]   WORLD_SIZE: 4
+[2025-07-14 01:57:32]   NODE_RANK: 0
+[2025-07-14 01:57:32]   SLURM_GPUS_ON_NODE: 8
+[2025-07-14 01:57:32]   SLURM_JOB_NUM_NODES: 1
+[2025-07-14 01:57:32] Testing network connectivity...
+PING 172.26.10.11 (172.26.10.11) 56(84) bytes of data.
+64 bytes from 172.26.10.11: icmp_seq=1 ttl=64 time=0.058 ms
+
+--- 172.26.10.11 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.058/0.058/0.058/0.000 ms
+[2025-07-14 01:57:32] Testing GPU availability...
+Mon Jul 14 01:57:32 2025       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.230.02             Driver Version: 535.230.02   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:05:00.0 Off |                  N/A |
+|  0%   29C    P8              10W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   1  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:06:00.0 Off |                  N/A |
+|  0%   28C    P8               5W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   2  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:28:00.0 Off |                  N/A |
+|  0%   28C    P8              11W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   3  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:29:00.0 Off |                  N/A |
+|  0%   27C    P8               1W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   4  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:43:00.0 Off |                  N/A |
+|  0%   26C    P8              21W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   5  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:44:00.0 Off |                  N/A |
+|  0%   26C    P8               1W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   6  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:63:00.0 Off |                  N/A |
+|  0%   28C    P8               1W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   7  NVIDIA GeForce RTX 2080 Ti     On  | 00000000:64:00.0 Off |                  N/A |
+|  0%   29C    P8               3W / 250W |      1MiB / 11264MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+[2025-07-14 01:57:32] Starting distributed training...
+[2025-07-14 01:57:32] Command: torchrun --nproc_per_node=8 --nnodes=1 --node_rank=0 --rdzv_backend=c10d --rdzv_endpoint=172.26.10.11:39673 train_vae.py
+Cleaning up...
+Cleanup completed

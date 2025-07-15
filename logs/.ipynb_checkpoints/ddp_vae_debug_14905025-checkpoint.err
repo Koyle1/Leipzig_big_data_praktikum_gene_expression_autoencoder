@@ -1,0 +1,6 @@
+[W714 02:25:49.302510977 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [localhost]:29500 (errno: 97 - Address family not supported by protocol).
+[W714 02:25:55.215207067 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:12331 (errno: 97 - Address family not supported by protocol).
+[W714 02:25:55.315626453 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:45165 (errno: 97 - Address family not supported by protocol).
+[W714 02:25:57.776102483 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:45165 (errno: 97 - Address family not supported by protocol).
+[W714 02:25:57.777904521 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara10.sc.uni-leipzig.de]:45165 (errno: 97 - Address family not supported by protocol).
+[W714 02:25:58.525231170 ProcessGroupNCCL.cpp:1479] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())

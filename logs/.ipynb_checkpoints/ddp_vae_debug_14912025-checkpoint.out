@@ -1,0 +1,78 @@
+[2025-07-14 12:30:15] Starting SLURM job 14912025 on clara08.sc.uni-leipzig.de
+[2025-07-14 12:30:15] Job parameters: 4 tasks, 4 GPUs, 1 nodes
+[2025-07-14 12:30:15] Loading required modules...
+[2025-07-14 12:30:17] Activating conda environment...
+[2025-07-14 12:30:18] Verifying environment...
+Python 3.10.18
+PyTorch version: 2.7.1+cu126
+Cleaning up...
+Cleanup completed
+CUDA available: True
+CUDA devices: 4
+[2025-07-14 12:30:37] Checking training script...
+[2025-07-14 12:30:37] Training script found: -rw-r--r-- 1 ci72buri sc_users 20831 Jul 14 12:29 train_vae.py
+[2025-07-14 12:30:37] Testing training script import...
+Training script import: FAILED - No module named 'psutil'
+[2025-07-14 12:30:43] Checking required modules...
+torch: OK
+torch.distributed: OK
+numpy: OK
+wandb: OK
+All required modules available
+[2025-07-14 12:30:47] Configuring NCCL settings...
+[2025-07-14 12:30:47] Setting up distributed training configuration...
+[2025-07-14 12:30:47] Distributed training configuration:
+[2025-07-14 12:30:47]   MASTER_ADDR: 172.26.10.8
+[2025-07-14 12:30:47]   MASTER_PORT: 11871
+[2025-07-14 12:30:47]   WORLD_SIZE: 4
+[2025-07-14 12:30:47]   NODE_RANK: 0
+[2025-07-14 12:30:47]   SLURM_GPUS_ON_NODE: 4
+[2025-07-14 12:30:47]   SLURM_JOB_NUM_NODES: 1
+[2025-07-14 12:30:47] Testing network connectivity...
+PING 172.26.10.8 (172.26.10.8) 56(84) bytes of data.
+64 bytes from 172.26.10.8: icmp_seq=1 ttl=64 time=0.035 ms
+
+--- 172.26.10.8 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.035/0.035/0.035/0.000 ms
+[2025-07-14 12:30:47] Testing GPU availability...
+Mon Jul 14 12:30:47 2025       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.230.02             Driver Version: 535.230.02   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  Tesla V100-PCIE-32GB           On  | 00000000:05:00.0 Off |                    0 |
+| N/A   29C    P0              24W / 250W |      0MiB / 32768MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   1  Tesla V100-PCIE-32GB           On  | 00000000:29:00.0 Off |                    0 |
+| N/A   26C    P0              24W / 250W |      0MiB / 32768MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   2  Tesla V100-PCIE-32GB           On  | 00000000:43:00.0 Off |                    0 |
+| N/A   25C    P0              25W / 250W |      0MiB / 32768MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   3  Tesla V100-PCIE-32GB           On  | 00000000:64:00.0 Off |                    0 |
+| N/A   31C    P0              25W / 250W |      0MiB / 32768MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+[2025-07-14 12:30:47] Checking torchrun availability...
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/torchrun
+usage: torchrun [-h] [--nnodes NNODES] [--nproc-per-node NPROC_PER_NODE] [--rdzv-backend RDZV_BACKEND] [--rdzv-endpoint RDZV_ENDPOINT] [--rdzv-id RDZV_ID] [--rdzv-conf RDZV_CONF] [--standalone]
+                [--max-restarts MAX_RESTARTS] [--monitor-interval MONITOR_INTERVAL] [--start-method {spawn,fork,forkserver}] [--role ROLE] [-m] [--no-python] [--run-path] [--log-dir LOG_DIR] [-r REDIRECTS] [-t TEE]
+                [--local-ranks-filter LOCAL_RANKS_FILTER] [--node-rank NODE_RANK] [--master-addr MASTER_ADDR] [--master-port MASTER_PORT] [--local-addr LOCAL_ADDR] [--logs-specs LOGS_SPECS]
+                training_script ...
+
+[2025-07-14 12:30:50] Testing basic torchrun functionality...

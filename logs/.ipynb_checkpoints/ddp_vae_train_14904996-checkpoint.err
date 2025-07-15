@@ -1,0 +1,127 @@
+[W714 01:57:34.348078085 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara11.sc.uni-leipzig.de]:39673 (errno: 97 - Address family not supported by protocol).
+[W714 01:57:34.516224627 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [clara11.sc.uni-leipzig.de]:42875 (errno: 97 - Address family not supported by protocol).
+[default2]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default2]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default3]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default3]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default0]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default0]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default1]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default1]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default6]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default6]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default4]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default4]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default7]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default7]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default5]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default5]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+W0714 01:57:42.339000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237231 closing signal SIGTERM
+W0714 01:57:42.340000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237232 closing signal SIGTERM
+W0714 01:57:42.341000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237233 closing signal SIGTERM
+W0714 01:57:42.341000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237234 closing signal SIGTERM
+W0714 01:57:42.342000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237235 closing signal SIGTERM
+W0714 01:57:42.342000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237236 closing signal SIGTERM
+W0714 01:57:42.343000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237238 closing signal SIGTERM
+E0714 01:57:42.630000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 2) local_rank: 6 (pid: 3237237) of binary: /home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/python3.10
+[default5]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default5]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default7]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default7]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default0]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default0]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default3]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default3]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default2]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default2]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default6]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default6]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default4]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default4]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default1]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default1]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+W0714 01:57:49.193000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237579 closing signal SIGTERM
+W0714 01:57:49.194000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237580 closing signal SIGTERM
+W0714 01:57:49.195000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237581 closing signal SIGTERM
+W0714 01:57:49.195000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237582 closing signal SIGTERM
+W0714 01:57:49.196000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237583 closing signal SIGTERM
+W0714 01:57:49.196000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237585 closing signal SIGTERM
+W0714 01:57:49.197000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237586 closing signal SIGTERM
+E0714 01:57:49.479000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 2) local_rank: 5 (pid: 3237584) of binary: /home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/python3.10
+[default2]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default2]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default5]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default5]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default7]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default7]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default1]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default1]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default4]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default4]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default3]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default3]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default0]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default0]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default6]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default6]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+W0714 01:57:55.942000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237800 closing signal SIGTERM
+W0714 01:57:55.943000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237801 closing signal SIGTERM
+W0714 01:57:55.943000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237803 closing signal SIGTERM
+W0714 01:57:55.943000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237804 closing signal SIGTERM
+W0714 01:57:55.944000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237805 closing signal SIGTERM
+W0714 01:57:55.944000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237806 closing signal SIGTERM
+W0714 01:57:55.944000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237807 closing signal SIGTERM
+E0714 01:57:56.230000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 2) local_rank: 2 (pid: 3237802) of binary: /home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/python3.10
+[default4]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default4]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default7]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default7]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default3]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default3]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default0]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default0]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default1]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default1]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default2]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default2]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default6]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default6]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+[default5]:usage: train_vae.py [-h] [--config CONFIG] [--resume RESUME]
+[default5]:train_vae.py: error: unrecognized arguments: --log_dir=logs --checkpoint_dir=checkpoints --job_id=14904996
+W0714 01:58:02.996000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237911 closing signal SIGTERM
+W0714 01:58:02.997000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237912 closing signal SIGTERM
+W0714 01:58:02.997000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237913 closing signal SIGTERM
+W0714 01:58:02.998000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237914 closing signal SIGTERM
+W0714 01:58:02.998000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237915 closing signal SIGTERM
+W0714 01:58:02.998000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237916 closing signal SIGTERM
+W0714 01:58:02.999000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3237917 closing signal SIGTERM
+E0714 01:58:03.281000 3237217 site-packages/torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 2) local_rank: 0 (pid: 3237910) of binary: /home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/python3.10
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in main
+    run(args)
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/run.py", line 883, in run
+    elastic_launch(
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 139, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 270, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_vae.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-07-14_01:58:02
+  host      : clara11.sc.uni-leipzig.de
+  rank      : 0 (local_rank: 0)
+  exitcode  : 2 (pid: 3237910)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

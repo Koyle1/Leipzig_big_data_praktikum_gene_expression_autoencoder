@@ -1,0 +1,78 @@
+[2025-07-14 02:10:34] Starting SLURM job 14904994 on paula12.sc.uni-leipzig.de
+[2025-07-14 02:10:34] Job parameters: 4 tasks, 8 GPUs, 1 nodes
+[2025-07-14 02:10:34] Loading required modules...
+[2025-07-14 02:10:36] Activating conda environment...
+[2025-07-14 02:10:36] Verifying environment...
+Python 3.10.18
+PyTorch version: 2.7.1+cu126
+CUDA available: True
+CUDA devices: 8
+[2025-07-14 02:10:43] Configuring NCCL settings...
+[2025-07-14 02:10:43] Setting up distributed training configuration...
+[2025-07-14 02:10:43] Distributed training configuration:
+[2025-07-14 02:10:43]   MASTER_ADDR: 172.18.62.12
+[2025-07-14 02:10:43]   MASTER_PORT: 25633
+[2025-07-14 02:10:43]   WORLD_SIZE: 4
+[2025-07-14 02:10:43]   NODE_RANK: 0
+[2025-07-14 02:10:43]   SLURM_GPUS_ON_NODE: 8
+[2025-07-14 02:10:43]   SLURM_JOB_NUM_NODES: 1
+[2025-07-14 02:10:43] Testing network connectivity...
+PING 172.18.62.12 (172.18.62.12) 56(84) bytes of data.
+64 bytes from 172.18.62.12: icmp_seq=1 ttl=64 time=0.052 ms
+
+--- 172.18.62.12 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.052/0.052/0.052/0.000 ms
+[2025-07-14 02:10:43] Testing GPU availability...
+Mon Jul 14 02:10:43 2025       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.247.01             Driver Version: 535.247.01   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA A30                     On  | 00000000:01:00.0 Off |                    0 |
+| N/A   30C    P0              28W / 165W |      0MiB / 24576MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   1  NVIDIA A30                     On  | 00000000:22:00.0 Off |                    0 |
+| N/A   30C    P0              29W / 165W |      0MiB / 24576MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   2  NVIDIA A30                     On  | 00000000:41:00.0 Off |                    0 |
+| N/A   31C    P0              28W / 165W |      0MiB / 24576MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   3  NVIDIA A30                     On  | 00000000:61:00.0 Off |                    0 |
+| N/A   32C    P0              27W / 165W |      0MiB / 24576MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   4  NVIDIA A30                     On  | 00000000:81:00.0 Off |                    0 |
+| N/A   34C    P0              31W / 165W |      0MiB / 24576MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   5  NVIDIA A30                     On  | 00000000:A1:00.0 Off |                    0 |
+| N/A   31C    P0              30W / 165W |      0MiB / 24576MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   6  NVIDIA A30                     On  | 00000000:C1:00.0 Off |                    0 |
+| N/A   31C    P0              31W / 165W |      0MiB / 24576MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   7  NVIDIA A30                     On  | 00000000:E1:00.0 Off |                    0 |
+| N/A   29C    P0              27W / 165W |      0MiB / 24576MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+[2025-07-14 02:10:47] Starting distributed training...
+[2025-07-14 02:10:47] Command: torchrun --nproc_per_node=8 --nnodes=1 --node_rank=0 --rdzv_backend=c10d --rdzv_endpoint=172.18.62.12:25633 train_vae.py
+Cleaning up...
+Cleanup completed

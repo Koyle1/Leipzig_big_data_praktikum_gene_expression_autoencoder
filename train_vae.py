@@ -1,144 +1,229 @@
-from src.vae import CellVAE, elbo_loss_function, elbo_loss_function_normalized
-from autoCell.data_loader import SingleCellDataset
-# from autoCell.data_loader_sequential import BatchedSingleCellDataset
+import os
+import time
 import torch
-from torch.utils.data import DataLoader
-from torch.optim import RMSprop
+import torch.distributed as dist
 import numpy as np
 import random
+from torch.nn.parallel import DistributedDataParallel as DDP
+from torch.utils.data import DataLoader, DistributedSampler
+from torch.optim import RMSprop
+from torch.amp import autocast,GradScaler
 import wandb
+import os
+import socket
+import torch.distributed as dist
+from autoCell.data_loader import SingleCellDataset
 
-def main():
-    n_epochs = 5000
-    batch_size = 10
+
+from src.vae import CellVAE
+from autoCell.data_loader import SingleCellDataset
+
+import torch.nn.functional as F
+
+
+def setup_ddp():
+    dist.init_process_group(
+        backend="nccl",
+        init_method="env://"
+    )
+    torch.cuda.set_device(dist.get_rank() % torch.cuda.device_count())
+
+def cleanup_ddp():
+    dist.destroy_process_group()
+
+def loss_function(self, recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor, logvar: torch.Tensor, beta: float = 0.0):
+        """
+        ELBO loss using RMSE + beta * KLD.
+        """
+        if logvar is None:
+            logvar = torch.ones_like(mu)
+
+        mse = F.mse_loss(recon_x, x, reduction='mean')
+        rmse = torch.sqrt(mse)
+        KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+        return rmse + beta * KLD, rmse, KLD
+
+def evaluate_and_print_reconstructions(model, dataloader, device):
+    model.eval()
+    tau0 = torch.Tensor([1.0]).to(device)
+    with torch.no_grad():
+        data_iter = iter(dataloader)
+        data = next(data_iter).to(device)
+        recon_batch, mu, logvar, values, sparsity_logits = model(data, tau0)
+
+    print("\nTop 5 largest and smallest features (by original value) for first 10 samples:\n")
+    for i in range(10):
+        orig = data[i]
+        recon = recon_batch[i]
+        values = [(j, orig[j].item(), recon[j].item()) for j in range(orig.shape[0])]
+
+        # Sort by original value
+        sorted_vals = sorted(values, key=lambda x: x[1])
+
+        print(f"Sample {i}:")
+
+        print("  Smallest 5 features:")
+        for j, orig_val, recon_val in sorted_vals[:5]:
+            print(f"    Feature {j}: orig={orig_val:.4f}, recon={recon_val:.4f}")
+
+        print("  Largest 5 features:")
+        for j, orig_val, recon_val in sorted_vals[-5:][::-1]:  # reversed to show largest first
+            print(f"    Feature {j}: orig={orig_val:.4f}, recon={recon_val:.4f}")
+        
+        print("")
+
+def train():
+    setup_ddp()
+    rank = dist.get_rank()
+    world_size = dist.get_world_size()
+    seed = 42
+    torch.manual_seed(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.benchmark = True
+    
+    # Hyperparams
+    batch_size = 1_000
+    n_epochs = 1000
     data_file_path = "data.h5ad"
-    n_data_samples = 100
-    learning_rate = 1e-6
+    n_data_samples = 20_000
+    learning_rate = 1e-3
     scale_factor = 1.0
     latent_dim = 2
+    number_of_features = 200
     use_variance = True
-    beta = 1
-    tau0 = torch.Tensor([1.0])
-    model_save_path = "model.pth"
-    torch_device = "cpu"
-    verbose = True
-    log_interval = 5
-    save_interval = 5
-    torch.manual_seed(42)
-    np.random.seed(42)
-    random.seed(42)
-
-
-    # Initialize tracking
-    run = wandb.init(
-        entity="coyfelix7-universit-t-leipzig",
-        project="big_data_vae",
-        config={
-            "learning_rate": learning_rate,
-            "dataset": data_file_path,
-            "n_data_samples": n_data_samples,
-            "epochs": n_epochs,
-            "latent_dim": latent_dim,
-            "batch_size": batch_size,
-            "use_variance": use_variance,
-            "vae-beta": beta
-        }
+    beta = 2e-2
+    vae_processing = True
+    
+    # New loss function hyperparameters
+    sparsity_threshold = 1e-4
+    sparsity_weight = 1.0
+    value_weight = 1.0
+    
+    device = torch.device(f"cuda:{rank % torch.cuda.device_count()}")
+    torch.cuda.set_device(device)
+    
+    if rank == 0:
+        wandb.init(
+            entity="coyfelix7-universit-t-leipzig",
+            project="big_data_vae",
+            config={
+                "learning_rate": learning_rate,
+                "dataset": data_file_path,
+                "n_data_samples": n_data_samples,
+                "epochs": n_epochs,
+                "latent_dim": latent_dim,
+                "batch_size": batch_size,
+                "vae-beta": beta,
+                "sparsity_threshold": sparsity_threshold,
+                "sparsity_weight": sparsity_weight,
+                "value_weight": value_weight
+            }
+        )
+    
+    tau0 = torch.Tensor([1.0]).to(device)
+    
+    # Load and cache dataset into memory
+    dataset_tmp = SingleCellDataset(
+        file_path=data_file_path,
+        cell_subset=list(range(n_data_samples)),
+        log_transform=True, normalize=True,
+        scale_factor=scale_factor,
+        remove_outliers=[0.05, 0.95],
+        select_n_genes=number_of_features,
+        use_vae_preprocessing=vae_processing
     )
-
-    # Set torch device
-    device = torch.device(torch_device)
-    tau0 = tau0.to(device)
-
-    # Load Data
-    dataset_tmp = SingleCellDataset(file_path=data_file_path, cell_subset=[i for i in range(n_data_samples)], log_transform=True, normalize=True, scale_factor=scale_factor)
     genes = dataset_tmp.adata.var_names
-    gene_subset = genes[:50]
-    dataset = SingleCellDataset(file_path=data_file_path, cell_subset=[i for i in range(n_data_samples)], gene_subset=gene_subset, log_transform=True, normalize=True, scale_factor=scale_factor)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-    # dataset = BatchedSingleCellDataset(
-    #     file_path=data_file_path,
-    #     cell_subset=[i for i in range(n_data_samples)],
-    #     batch_size=batch_size,
-    #     cache_size=400,
-    #     log_transform=True,
-    #     normalize=True,
-    #     scale_factor=scale_factor,
-    # )
-    # dataloader = DataLoader(
-    #     dataset,
-    #     batch_size=batch_size,
-    #     shuffle=True,num_workers=4,
-    #     pin_memory=torch.cuda.is_available()
-    # )
-
-
-    # Define Model
-    model = CellVAE(input_dim=dataset.n_genes, latent_dim=latent_dim, use_variance=use_variance)
-    model = model.to(device)
+    
+    dataset = dataset_tmp
+    sampler = DistributedSampler(dataset, num_replicas=world_size, rank=rank, shuffle=True)
+    dataloader = DataLoader(dataset, batch_size=batch_size, sampler=sampler, 
+                           num_workers=os.cpu_count() // dist.get_world_size(),
+                           pin_memory=True, persistent_workers=True)
+    
+    model = CellVAE(input_dim=dataset.n_genes, latent_dim=latent_dim, use_variance=use_variance).to(device)
+    model = DDP(model, device_ids=[device.index])
     optimizer = RMSprop(model.parameters(), lr=learning_rate)
-
-
-    if verbose: print("Starting training...")
+    scaler = GradScaler()
+    
     for epoch in range(1, n_epochs + 1):
-        # simple beta annealing
-        beta_anneal = min(beta, epoch / 1000)
-        # beta_anneal = beta
-
-
         model.train()
-        train_loss = 0
-        train_BCE = 0
-        train_KLD = 0
-        for batch_idx, data, in enumerate(dataloader):
-            data = data.to(device)
-            (recon_batch, dropout_probs), mu, logvar = model(data, tau0)
-            loss, BCE, KLD = elbo_loss_function(recon_batch, data, mu, logvar, beta=beta_anneal)
-            loss.backward()
-            train_loss += loss.item()
-            train_BCE += BCE.item()
-            train_KLD += KLD.item()
-            optimizer.step()
-            if verbose and batch_idx % log_interval == 0:
-                print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                    epoch, batch_idx * len(data), len(dataloader.dataset),
-                    100. * batch_idx / len(dataloader),
-                    loss.item() / len(data)))
-                # print(mu.detach().numpy())
-                # for name, param in model.named_parameters():
-                #     if param.grad is not None:
-                #         grad_mean = param.grad.mean().item()
-                #         grad_max = param.grad.abs().max().item()
-                #         print(f"{name}: grad mean = {grad_mean:.5f}, max = {grad_max:.5f}")
-
-        avg_loss = train_loss / len(dataloader.dataset)
-        if verbose: print(f"Train Epoch: {epoch} Average Loss: {avg_loss}")
-        run.log({
-                "step_avg_loss": avg_loss,
-                "step_avg_binary_cross_entropy": train_BCE / len(dataloader.dataset),
-                "step_avg_KL_divergence": train_KLD / len(dataloader.dataset),
-                # "last_batch_mean_dropout_probability": dropout_probs.mean().item()
-            })
-
-        if epoch % save_interval == 0:
-            print("last means")
-            print(mu.detach().numpy())
-            print("last logvars")
-            print(logvar.detach().numpy())
-            print("last z values")
-            print(model.last_z.numpy())
-            print("last grads")
-            for name, param in model.named_parameters():
-                    if param.grad is not None:
-                        grad_mean = param.grad.mean().item()
-                        grad_max = param.grad.abs().max().item()
-                        print(f"{name}: grad mean = {grad_mean:.5f}, max = {grad_max:.5f}")
+        sampler.set_epoch(epoch)
+        
+        # Updated metrics tracking
+        train_loss = train_value_rmse = train_sparsity_loss = train_KLD = 0
+        train_sparsity_acc = 0
+        
+        t0 = time.perf_counter()
+        
+        for data in dataloader:
+            data = data.to(device, non_blocking=True)
+            if rank == 0 and epoch % 10 == 0:
+                print(f"Epoch {epoch}, batch size: {data.size(0)}")
             
-            torch.save(model.state_dict(), model_save_path)
-
-    run.finish()
-
-    # Save final model
-    torch.save(model.state_dict(), model_save_path)
+            with autocast(device_type='cuda'):
+                recon_batch, mu, logvar, values, sparsity_logits = model(data, tau0) 
+                
+                # Updated loss function call with new parameters
+                loss, value_rmse, sparsity_loss, KLD, sparsity_accuracy = model.module.loss_function(
+                    recon_batch,        # recon_x
+                    data,               # x
+                    mu,                 # mu
+                    logvar,             # logvar
+                    values,             # values
+                    sparsity_logits,    # sparsity_logits
+                    beta=beta,     # beta (optional, has default)
+                    sparsity_threshold=1e-3,  # sparsity_threshold (optional, has default)
+                    sparsity_weight=1.0,      # sparsity_weight (optional, has default)
+                    value_weight=1.0          # value_weight (optional, has default)
+                )
+            
+            print(f"[Rank {rank}] Model forward completed.")
+            
+            optimizer.zero_grad()
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            
+            # Updated metrics accumulation
+            train_loss += loss.item() * data.size(0)
+            train_value_rmse += value_rmse.item() * data.size(0)
+            train_sparsity_loss += sparsity_loss.item() * data.size(0)
+            train_KLD += KLD.item() * data.size(0)
+            train_sparsity_acc += sparsity_accuracy.item() * data.size(0)
+        
+        t1 = time.perf_counter()
+        
+        # Calculate averages
+        avg_loss = train_loss / len(dataloader.dataset)
+        avg_value_rmse = train_value_rmse / len(dataloader.dataset)
+        avg_sparsity_loss = train_sparsity_loss / len(dataloader.dataset)
+        avg_KLD = train_KLD / len(dataloader.dataset)
+        avg_sparsity_acc = train_sparsity_acc / len(dataloader.dataset)
+        
+        if rank == 0:
+            print(f"[Epoch {epoch}] Time: {t1-t0:.2f}s | Loss: {avg_loss:.4f} | "
+                  f"Value RMSE: {avg_value_rmse:.4f} | Sparsity Loss: {avg_sparsity_loss:.4f} | "
+                  f"Sparsity Acc: {avg_sparsity_acc:.4f}  | KLD: {avg_KLD:.4f}")
+            
+            # Updated wandb logging
+            wandb.log({
+                "epoch": epoch,
+                "avg_loss": avg_loss,
+                "value_rmse": avg_value_rmse,
+                "sparsity_loss": avg_sparsity_loss,
+                "sparsity_accuracy": avg_sparsity_acc,
+                "KLD": avg_KLD,
+                "learning_rate": optimizer.param_groups[0]['lr']
+            })
+    
+    if rank == 0:
+        evaluate_and_print_reconstructions(model.module, dataloader, device)
+        torch.save(model.module.state_dict(), "model.pth")
+        wandb.finish()
+    
+    cleanup_ddp()
 
 if __name__ == "__main__":
-    main()
+    train()

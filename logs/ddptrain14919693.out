@@ -1,0 +1,294 @@
+MASTER_ADDR is 172.18.62.11
+PING 172.18.62.11 (172.18.62.11) 56(84) bytes of data.
+64 bytes from 172.18.62.11: icmp_seq=1 ttl=64 time=0.043 ms
+
+--- 172.18.62.11 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.043/0.043/0.043/0.000 ms
+W0715 01:25:14.296000 70968 site-packages/torch/distributed/run.py:766] 
+W0715 01:25:14.296000 70968 site-packages/torch/distributed/run.py:766] *****************************************
+W0715 01:25:14.296000 70968 site-packages/torch/distributed/run.py:766] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0715 01:25:14.296000 70968 site-packages/torch/distributed/run.py:766] *****************************************
+[W715 01:25:14.256271941 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:54909 (errno: 97 - Address family not supported by protocol).
+[W715 01:25:14.398749559 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:34183 (errno: 97 - Address family not supported by protocol).
+[W715 01:25:18.369713795 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:34183 (errno: 97 - Address family not supported by protocol).
+[W715 01:25:18.370339883 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:34183 (errno: 97 - Address family not supported by protocol).
+[W715 01:25:18.370446944 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:34183 (errno: 97 - Address family not supported by protocol).
+[W715 01:25:18.370584533 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:34183 (errno: 97 - Address family not supported by protocol).
+[W715 01:25:18.370848700 socket.cpp:755] [c10d] The client socket cannot be initialized to connect to [paula11.sc.uni-leipzig.de]:34183 (errno: 97 - Address family not supported by protocol).
+wandb: Currently logged in as: coyfelix7 (coyfelix7-universit-t-leipzig) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+Using VAE-optimized preprocessing...
+Using VAE-optimized preprocessing...
+Using VAE-optimized preprocessing...
+Using VAE-optimized preprocessing...
+wandb: Tracking run with wandb version 0.21.0
+wandb: Run data is saved locally in /home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/wandb/run-20250715_012519-d6msuje3
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run fluent-planet-208
+wandb: ⭐️ View project at https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae
+wandb: 🚀 View run at https://wandb.ai/coyfelix7-universit-t-leipzig/big_data_vae/runs/d6msuje3
+Using VAE-optimized preprocessing...
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+paula11:70995:70995 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70995:70995 [0] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:70995:70995 [0] NCCL INFO cudaDriverVersion 12020
+paula11:70995:70995 [0] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:70995:70995 [0] NCCL INFO Comm config Blocking set to 1
+paula11:70997:70997 [2] NCCL INFO cudaDriverVersion 12020
+paula11:70997:70997 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70997:70997 [2] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:70997:70997 [2] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:70998:70998 [3] NCCL INFO cudaDriverVersion 12020
+paula11:70998:70998 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70998:70998 [3] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:70998:70998 [3] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:70997:70997 [2] NCCL INFO Comm config Blocking set to 1
+paula11:70998:70998 [3] NCCL INFO Comm config Blocking set to 1
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Dataset loaded: 20000 cells × 200 genes
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+paula11:70999:70999 [4] NCCL INFO cudaDriverVersion 12020
+paula11:70999:70999 [4] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70999:70999 [4] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:70999:70999 [4] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:70999:70999 [4] NCCL INFO Comm config Blocking set to 1
+paula11:70996:70996 [1] NCCL INFO cudaDriverVersion 12020
+paula11:70996:70996 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70996:70996 [1] NCCL INFO Bootstrap: Using bond0:172.18.62.11<0>
+paula11:70996:70996 [1] NCCL INFO NCCL version 2.26.2+cuda12.2
+paula11:70996:70996 [1] NCCL INFO Comm config Blocking set to 1
+paula11:70995:71121 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:70995:71121 [0] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:70995:71121 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70995:71121 [0] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:70995:71121 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:70995:71121 [0] NCCL INFO Using network Socket
+paula11:70995:71121 [0] NCCL INFO ncclCommInitRankConfig comm 0x55e2848ffba0 rank 0 nranks 5 cudaDev 0 nvmlDev 0 busId 22000 commId 0xce5907ad3dd2cf4c - Init START
+paula11:70997:71122 [2] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:70997:71122 [2] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:70997:71122 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70997:71122 [2] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:70997:71122 [2] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:70997:71122 [2] NCCL INFO Using network Socket
+paula11:70998:71123 [3] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:70998:71123 [3] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:70998:71123 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70998:71123 [3] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:70997:71122 [2] NCCL INFO ncclCommInitRankConfig comm 0x555612b6d0a0 rank 2 nranks 5 cudaDev 2 nvmlDev 2 busId 81000 commId 0xce5907ad3dd2cf4c - Init START
+paula11:70998:71123 [3] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:70998:71123 [3] NCCL INFO Using network Socket
+paula11:70998:71123 [3] NCCL INFO ncclCommInitRankConfig comm 0x55d9e121b620 rank 3 nranks 5 cudaDev 3 nvmlDev 3 busId a1000 commId 0xce5907ad3dd2cf4c - Init START
+paula11:70999:71124 [4] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:70999:71124 [4] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:70999:71124 [4] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70999:71124 [4] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:70999:71124 [4] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:70999:71124 [4] NCCL INFO Using network Socket
+paula11:70999:71124 [4] NCCL INFO ncclCommInitRankConfig comm 0x55b49bd065f0 rank 4 nranks 5 cudaDev 4 nvmlDev 4 busId e1000 commId 0xce5907ad3dd2cf4c - Init START
+paula11:70996:71125 [1] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+paula11:70996:71125 [1] NCCL INFO NCCL_IB_DISABLE set by environment to 1.
+paula11:70996:71125 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to bond0
+paula11:70996:71125 [1] NCCL INFO NET/Socket : Using [0]bond0:172.18.62.11<0>
+paula11:70996:71125 [1] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+paula11:70996:71125 [1] NCCL INFO Using network Socket
+paula11:70996:71125 [1] NCCL INFO ncclCommInitRankConfig comm 0x55baad020040 rank 1 nranks 5 cudaDev 1 nvmlDev 1 busId 61000 commId 0xce5907ad3dd2cf4c - Init START
+paula11:70998:71123 [3] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+paula11:70999:71124 [4] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+paula11:70997:71122 [2] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+paula11:70996:71125 [1] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+paula11:70995:71121 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+paula11:70999:71124 [4] NCCL INFO Bootstrap timings total 0.042254 (create 0.000039, send 0.015231, recv 0.000224, ring 0.024262, delay 0.000000)
+paula11:70998:71123 [3] NCCL INFO Bootstrap timings total 0.085989 (create 0.000024, send 0.018924, recv 0.040205, ring 0.024545, delay 0.000000)
+paula11:70996:71125 [1] NCCL INFO Bootstrap timings total 0.025819 (create 0.000024, send 0.022755, recv 0.000218, ring 0.000585, delay 0.000000)
+paula11:70997:71122 [2] NCCL INFO Bootstrap timings total 0.088902 (create 0.000026, send 0.015846, recv 0.006112, ring 0.000936, delay 0.000000)
+paula11:70995:71121 [0] NCCL INFO Bootstrap timings total 0.093590 (create 0.000036, send 0.000149, recv 0.090881, ring 0.000126, delay 0.000000)
+paula11:70999:71124 [4] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:70999:71124 [4] NCCL INFO Setting affinity for GPU 4 to 03e1,00000000,00000000
+paula11:70996:71125 [1] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:70999:71124 [4] NCCL INFO NVLS multicast support is not available on dev 4
+paula11:70995:71121 [0] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:70996:71125 [1] NCCL INFO Setting affinity for GPU 1 to 01
+paula11:70996:71125 [1] NCCL INFO NVLS multicast support is not available on dev 1
+paula11:70995:71121 [0] NCCL INFO Setting affinity for GPU 0 to 01,00000000
+paula11:70997:71122 [2] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:70995:71121 [0] NCCL INFO NVLS multicast support is not available on dev 0
+paula11:70998:71123 [3] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+paula11:70997:71122 [2] NCCL INFO Setting affinity for GPU 2 to 3f0000,00000000,00000000,00000000
+paula11:70997:71122 [2] NCCL INFO NVLS multicast support is not available on dev 2
+paula11:70998:71123 [3] NCCL INFO Setting affinity for GPU 3 to 3f,00000000,00000000,00000000
+paula11:70998:71123 [3] NCCL INFO NVLS multicast support is not available on dev 3
+paula11:70999:71124 [4] NCCL INFO comm 0x55b49bd065f0 rank 4 nRanks 5 nNodes 1 localRanks 5 localRank 4 MNNVL 0
+paula11:70998:71123 [3] NCCL INFO comm 0x55d9e121b620 rank 3 nRanks 5 nNodes 1 localRanks 5 localRank 3 MNNVL 0
+paula11:70997:71122 [2] NCCL INFO comm 0x555612b6d0a0 rank 2 nRanks 5 nNodes 1 localRanks 5 localRank 2 MNNVL 0
+paula11:70996:71125 [1] NCCL INFO comm 0x55baad020040 rank 1 nRanks 5 nNodes 1 localRanks 5 localRank 1 MNNVL 0
+paula11:70999:71124 [4] NCCL INFO Trees [0] -1/-1/-1->4->3 [1] -1/-1/-1->4->3
+paula11:70998:71123 [3] NCCL INFO Trees [0] 4/-1/-1->3->2 [1] 4/-1/-1->3->2
+paula11:70999:71124 [4] NCCL INFO P2P Chunksize set to 131072
+paula11:70998:71123 [3] NCCL INFO P2P Chunksize set to 131072
+paula11:70995:71121 [0] NCCL INFO comm 0x55e2848ffba0 rank 0 nRanks 5 nNodes 1 localRanks 5 localRank 0 MNNVL 0
+paula11:70997:71122 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1
+paula11:70996:71125 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0
+paula11:70997:71122 [2] NCCL INFO P2P Chunksize set to 131072
+paula11:70996:71125 [1] NCCL INFO P2P Chunksize set to 131072
+paula11:70995:71121 [0] NCCL INFO Channel 00/02 : 0 1 2 3 4
+paula11:70995:71121 [0] NCCL INFO Channel 01/02 : 0 1 2 3 4
+paula11:70995:71121 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+paula11:70995:71121 [0] NCCL INFO P2P Chunksize set to 131072
+paula11:70995:71121 [0] NCCL INFO Check P2P Type intraNodeP2pSupport 0 directMode 0
+paula11:70997:71137 [2] NCCL INFO [Proxy Service] Device 2 CPU core 116
+paula11:70998:71136 [3] NCCL INFO [Proxy Service] Device 3 CPU core 101
+paula11:70998:71138 [3] NCCL INFO [Proxy Service UDS] Device 3 CPU core 99
+paula11:70997:71140 [2] NCCL INFO [Proxy Service UDS] Device 2 CPU core 112
+paula11:70999:71143 [4] NCCL INFO [Proxy Service UDS] Device 4 CPU core 72
+paula11:70999:71139 [4] NCCL INFO [Proxy Service] Device 4 CPU core 73
+paula11:70998:71123 [3] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:70998:71123 [3] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:70997:71122 [2] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:70997:71122 [2] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:70996:71125 [1] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:70996:71125 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:70995:71121 [0] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:70995:71121 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:70995:71121 [0] NCCL INFO CC Off, workFifoBytes 1048576
+paula11:70999:71124 [4] NCCL INFO threadThresholds 8/8/64 | 40/8/64 | 512 | 512
+paula11:70999:71124 [4] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+paula11:70998:71123 [3] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:70998:71123 [3] NCCL INFO ncclCommInitRankConfig comm 0x55d9e121b620 rank 3 nranks 5 cudaDev 3 nvmlDev 3 busId a1000 commId 0xce5907ad3dd2cf4c - Init COMPLETE
+paula11:70998:71123 [3] NCCL INFO Init timings - ncclCommInitRankConfig: rank 3 nranks 5 total 0.30 (kernels 0.12, alloc 0.00, bootstrap 0.09, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:70997:71122 [2] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:70997:71122 [2] NCCL INFO ncclCommInitRankConfig comm 0x555612b6d0a0 rank 2 nranks 5 cudaDev 2 nvmlDev 2 busId 81000 commId 0xce5907ad3dd2cf4c - Init COMPLETE
+paula11:70997:71122 [2] NCCL INFO Init timings - ncclCommInitRankConfig: rank 2 nranks 5 total 0.31 (kernels 0.12, alloc 0.00, bootstrap 0.09, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:70999:71124 [4] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:70999:71124 [4] NCCL INFO ncclCommInitRankConfig comm 0x55b49bd065f0 rank 4 nranks 5 cudaDev 4 nvmlDev 4 busId e1000 commId 0xce5907ad3dd2cf4c - Init COMPLETE
+paula11:70999:71124 [4] NCCL INFO Init timings - ncclCommInitRankConfig: rank 4 nranks 5 total 0.26 (kernels 0.12, alloc 0.00, bootstrap 0.04, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:70996:71125 [1] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:70996:71125 [1] NCCL INFO ncclCommInitRankConfig comm 0x55baad020040 rank 1 nranks 5 cudaDev 1 nvmlDev 1 busId 61000 commId 0xce5907ad3dd2cf4c - Init COMPLETE
+paula11:70996:71125 [1] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 5 total 0.24 (kernels 0.12, alloc 0.00, bootstrap 0.03, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:70995:71121 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+paula11:70995:71121 [0] NCCL INFO ncclCommInitRankConfig comm 0x55e2848ffba0 rank 0 nranks 5 cudaDev 0 nvmlDev 0 busId 22000 commId 0xce5907ad3dd2cf4c - Init COMPLETE
+paula11:70995:71121 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 5 total 0.32 (kernels 0.12, alloc 0.00, bootstrap 0.09, allgathers 0.00, topo 0.08, graphs 0.00, connections 0.01, rest 0.00)
+paula11:70995:71145 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 32
+paula11:70996:71144 [1] NCCL INFO [Proxy Service UDS] Device 1 CPU core 0
+paula11:70995:71142 [0] NCCL INFO [Proxy Service] Device 0 CPU core 32
+paula11:70996:71141 [1] NCCL INFO [Proxy Service] Device 1 CPU core 0
+paula11:70997:71148 [2] NCCL INFO Channel 00 : 2[2] -> 3[3] via SHM/direct/direct
+paula11:70998:71147 [3] NCCL INFO Channel 00 : 3[3] -> 4[4] via SHM/direct/direct
+paula11:70997:71148 [2] NCCL INFO Channel 01 : 2[2] -> 3[3] via SHM/direct/direct
+paula11:70998:71147 [3] NCCL INFO Channel 01 : 3[3] -> 4[4] via SHM/direct/direct
+paula11:70999:71149 [4] NCCL INFO Channel 00 : 4[4] -> 0[0] via SHM/direct/direct
+paula11:70999:71149 [4] NCCL INFO Channel 01 : 4[4] -> 0[0] via SHM/direct/direct
+paula11:70995:71150 [0] NCCL INFO Channel 00 : 0[0] -> 1[1] via SHM/direct/direct
+paula11:70996:71151 [1] NCCL INFO Channel 00 : 1[1] -> 2[2] via SHM/direct/direct
+paula11:70995:71150 [0] NCCL INFO Channel 01 : 0[0] -> 1[1] via SHM/direct/direct
+paula11:70996:71151 [1] NCCL INFO Channel 01 : 1[1] -> 2[2] via SHM/direct/direct
+paula11:70999:71149 [4] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+paula11:70998:71147 [3] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+paula11:70997:71148 [2] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+paula11:70996:71151 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+paula11:70995:71150 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/utils/data/dataloader.py:626: UserWarning: This DataLoader will create 25 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 224, in <module>
+    train()
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 169, in train
+    loss, value_rmse, sparsity_loss, KLD, sparsity_accuracy = model.module.loss_function(
+  File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/src/vae.py", line 89, in loss_function
+    sparsity_loss = F.binary_cross_entropy(sparsity_probs, is_nonzero, reduction='mean')
+  File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/nn/functional.py", line 3569, in binary_cross_entropy
+    return torch._C._nn.binary_cross_entropy(input, target, weight, reduction_enum)
+RuntimeError: torch.nn.functional.binary_cross_entropy and torch.nn.BCELoss are unsafe to autocast.
+Many models use a sigmoid layer right before the binary cross entropy layer.
+In this case, combine the two layers using torch.nn.functional.binary_cross_entropy_with_logits
+or torch.nn.BCEWithLogitsLoss.  binary_cross_entropy_with_logits and BCEWithLogits are
+safe to autocast.
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 224, in <module>
+[rank4]:     train()
+[rank4]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 169, in train
+[rank4]:     loss, value_rmse, sparsity_loss, KLD, sparsity_accuracy = model.module.loss_function(
+[rank4]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/src/vae.py", line 89, in loss_function
+[rank4]:     sparsity_loss = F.binary_cross_entropy(sparsity_probs, is_nonzero, reduction='mean')
+[rank4]:   File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/nn/functional.py", line 3569, in binary_cross_entropy
+[rank4]:     return torch._C._nn.binary_cross_entropy(input, target, weight, reduction_enum)
+[rank4]: RuntimeError: torch.nn.functional.binary_cross_entropy and torch.nn.BCELoss are unsafe to autocast.
+[rank4]: Many models use a sigmoid layer right before the binary cross entropy layer.
+[rank4]: In this case, combine the two layers using torch.nn.functional.binary_cross_entropy_with_logits
+[rank4]: or torch.nn.BCEWithLogitsLoss.  binary_cross_entropy_with_logits and BCEWithLogits are
+[rank4]: safe to autocast.
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 224, in <module>
+[rank2]:     train()
+[rank2]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 169, in train
+[rank2]:     loss, value_rmse, sparsity_loss, KLD, sparsity_accuracy = model.module.loss_function(
+[rank2]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/src/vae.py", line 89, in loss_function
+[rank2]:     sparsity_loss = F.binary_cross_entropy(sparsity_probs, is_nonzero, reduction='mean')
+[rank2]:   File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/nn/functional.py", line 3569, in binary_cross_entropy
+[rank2]:     return torch._C._nn.binary_cross_entropy(input, target, weight, reduction_enum)
+[rank2]: RuntimeError: torch.nn.functional.binary_cross_entropy and torch.nn.BCELoss are unsafe to autocast.
+[rank2]: Many models use a sigmoid layer right before the binary cross entropy layer.
+[rank2]: In this case, combine the two layers using torch.nn.functional.binary_cross_entropy_with_logits
+[rank2]: or torch.nn.BCEWithLogitsLoss.  binary_cross_entropy_with_logits and BCEWithLogits are
+[rank2]: safe to autocast.
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 224, in <module>
+[rank1]:     train()
+[rank1]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 169, in train
+[rank1]:     loss, value_rmse, sparsity_loss, KLD, sparsity_accuracy = model.module.loss_function(
+[rank1]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/src/vae.py", line 89, in loss_function
+[rank1]:     sparsity_loss = F.binary_cross_entropy(sparsity_probs, is_nonzero, reduction='mean')
+[rank1]:   File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/nn/functional.py", line 3569, in binary_cross_entropy
+[rank1]:     return torch._C._nn.binary_cross_entropy(input, target, weight, reduction_enum)
+[rank1]: RuntimeError: torch.nn.functional.binary_cross_entropy and torch.nn.BCELoss are unsafe to autocast.
+[rank1]: Many models use a sigmoid layer right before the binary cross entropy layer.
+[rank1]: In this case, combine the two layers using torch.nn.functional.binary_cross_entropy_with_logits
+[rank1]: or torch.nn.BCEWithLogitsLoss.  binary_cross_entropy_with_logits and BCEWithLogits are
+[rank1]: safe to autocast.
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 224, in <module>
+[rank3]:     train()
+[rank3]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 169, in train
+[rank3]:     loss, value_rmse, sparsity_loss, KLD, sparsity_accuracy = model.module.loss_function(
+[rank3]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/src/vae.py", line 89, in loss_function
+[rank3]:     sparsity_loss = F.binary_cross_entropy(sparsity_probs, is_nonzero, reduction='mean')
+[rank3]:   File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/nn/functional.py", line 3569, in binary_cross_entropy
+[rank3]:     return torch._C._nn.binary_cross_entropy(input, target, weight, reduction_enum)
+[rank3]: RuntimeError: torch.nn.functional.binary_cross_entropy and torch.nn.BCELoss are unsafe to autocast.
+[rank3]: Many models use a sigmoid layer right before the binary cross entropy layer.
+[rank3]: In this case, combine the two layers using torch.nn.functional.binary_cross_entropy_with_logits
+[rank3]: or torch.nn.BCEWithLogitsLoss.  binary_cross_entropy_with_logits and BCEWithLogits are
+[rank3]: safe to autocast.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 224, in <module>
+[rank0]:     train()
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/train_vae.py", line 169, in train
+[rank0]:     loss, value_rmse, sparsity_loss, KLD, sparsity_accuracy = model.module.loss_function(
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/projects/vae/Leipzig_big_data_praktikum_gene_expression_autoencoder/src/vae.py", line 89, in loss_function
+[rank0]:     sparsity_loss = F.binary_cross_entropy(sparsity_probs, is_nonzero, reduction='mean')
+[rank0]:   File "/home/sc.uni-leipzig.de/ci72buri/.conda/envs/cell-vae/lib/python3.10/site-packages/torch/nn/functional.py", line 3569, in binary_cross_entropy
+[rank0]:     return torch._C._nn.binary_cross_entropy(input, target, weight, reduction_enum)
+[rank0]: RuntimeError: torch.nn.functional.binary_cross_entropy and torch.nn.BCELoss are unsafe to autocast.
+[rank0]: Many models use a sigmoid layer right before the binary cross entropy layer.
+[rank0]: In this case, combine the two layers using torch.nn.functional.binary_cross_entropy_with_logits
+[rank0]: or torch.nn.BCEWithLogitsLoss.  binary_cross_entropy_with_logits and BCEWithLogits are
+[rank0]: safe to autocast.
+slurmstepd: error: *** JOB 14919693 ON paula11 CANCELLED AT 2025-07-15T01:27:06 ***
