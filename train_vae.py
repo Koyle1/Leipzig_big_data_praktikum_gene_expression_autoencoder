@@ -85,13 +85,13 @@ def train():
     
     # Hyperparams
     batch_size = 1_000
-    n_epochs = 1000
+    n_epochs = 1_000
     data_file_path = "data.h5ad"
-    n_data_samples = 20_000
-    learning_rate = 1e-3
+    n_data_samples = 10_000
+    learning_rate = 2e-4
     scale_factor = 1.0
     latent_dim = 2
-    number_of_features = 200
+    number_of_features = 2_000
     use_variance = True
     beta = 2e-2
     vae_processing = True
@@ -174,7 +174,7 @@ def train():
                     values,             # values
                     sparsity_logits,    # sparsity_logits
                     beta=beta,     # beta (optional, has default)
-                    sparsity_threshold=1e-3,  # sparsity_threshold (optional, has default)
+                    sparsity_threshold=0.0001,  # sparsity_threshold (optional, has default)
                     sparsity_weight=1.0,      # sparsity_weight (optional, has default)
                     value_weight=1.0          # value_weight (optional, has default)
                 )
@@ -191,7 +191,8 @@ def train():
             train_value_rmse += value_rmse.item() * data.size(0)
             train_sparsity_loss += sparsity_loss.item() * data.size(0)
             train_KLD += KLD.item() * data.size(0)
-            train_sparsity_acc += sparsity_accuracy.item() * data.size(0)
+            #train_sparsity_acc += sparsity_accuracy.item() * data.size(0)
+            train_sparsity_acc = 0
         
         t1 = time.perf_counter()
         
@@ -213,7 +214,7 @@ def train():
                 "avg_loss": avg_loss,
                 "value_rmse": avg_value_rmse,
                 "sparsity_loss": avg_sparsity_loss,
-                "sparsity_accuracy": avg_sparsity_acc,
+                "pr_auc": avg_sparsity_acc,
                 "KLD": avg_KLD,
                 "learning_rate": optimizer.param_groups[0]['lr']
             })
