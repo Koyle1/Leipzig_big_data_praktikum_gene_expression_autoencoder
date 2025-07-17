@@ -9,5 +9,5 @@ This repository contains code and artifacts for the "Big Data Praktikum" course 
 
 Setup conda env with:
     - (conda init) #if you have never used conda before
-    - conda env create -f env.yml
+    - conda env create -f env.yaml
     - conda activate cell-vae
