@@ -53,10 +53,10 @@ class SingleCellDataset(Dataset):
         self.adata = ad.read_h5ad(self.file_path)
 
         # Subset cells
-        if self.cell_subset is not None:
-            if isinstance(self.cell_subset, (list, np.ndarray)):
-                # Boolean mask or list of indices
-                self.adata = self.adata[self.cell_subset, :]
+        if isinstance(self.cell_subset, (list, np.ndarray)):
+            if isinstance(self.cell_subset, np.ndarray) and self.cell_subset.dtype == bool:
+                assert len(self.cell_subset) == self.adata.n_obs, "Boolean mask length mismatch"
+            self.adata = self.adata[self.cell_subset, :]
 
         # Subset genes
         if self.gene_subset is not None:
@@ -109,27 +109,30 @@ class SingleCellDataset(Dataset):
         print(f"Dataset loaded: {self.adata.n_obs} cells × {self.adata.n_vars} genes")
 
     def _preprocess_expression(self):
+        # Filter based on number of expressed genes per cell
+        sc.pp.filter_cells(self.adata, min_genes=1500)
+    
         # HVG selection first
         if self.select_n_genes is not None:
             # Filter genes expressed in at least 1% of cells
             sc.pp.filter_genes(self.adata, min_cells=int(0.01 * self.adata.n_obs))
             
-            # Highly variable genes selection (before transform)
+            # Highly variable genes selection
             sc.pp.highly_variable_genes(
                 self.adata,
                 n_top_genes=self.select_n_genes,
                 min_mean=0.01,
-                max_mean=5,
+                max_mean=100,
                 flavor='seurat'
             )
             self.adata = self.adata[:, self.adata.var.highly_variable]
-
+    
         X = self.adata.X.copy()
-
+    
         if hasattr(X, 'todense'):
             X = np.asarray(X.todense())
-
-        # Outlier removal
+    
+        # Outlier clipping BEFORE log and normalization
         if self.remove_outliers is not None:
             assert len(self.remove_outliers) == 2, "remove_outliers must be a list of [low_quantile, high_quantile]"
             low, high = self.remove_outliers
@@ -137,33 +140,29 @@ class SingleCellDataset(Dataset):
                 lower_q = np.quantile(X[:, i], low)
                 upper_q = np.quantile(X[:, i], high)
                 X[:, i] = np.clip(X[:, i], lower_q, upper_q)
-
+    
         # Size factor normalization
         counts_per_cell = X.sum(axis=1, keepdims=True)
         counts_per_cell[counts_per_cell == 0] = 1
         X = X / counts_per_cell * self.scale_factor
-
+    
         # Log transform
         if self.log_transform:
             X = np.log1p(X)
-
-        # Normalization (Z-score gene-wise)
+    
+        # Gene-wise Z-score normalization
         if self.normalize:
             means = np.mean(X, axis=0, keepdims=True)
             stds = np.std(X, axis=0, keepdims=True)
             stds[stds == 0] = 1
-            X = (X - means) / stds
-
-        # Clip extreme values after log transform
-        if self.log_transform:
-            upper_clip = np.percentile(X, 99)
-            X = np.clip(X, 0, upper_clip)
-
+            X = ((X - means) / stds) * 100
+    
         self.adata.X = X
         self.n_cells, self.n_genes = self.adata.shape
 
+
     @staticmethod
-    def preprocess_for_vae(raw_counts, n_top_genes=3000, target_sum=10000):
+    def preprocess_for_vae(raw_counts, n_top_genes=3000, target_sum=10000, normalize=False, scale=10, clip=False):
         """
         Complete preprocessing pipeline optimized for VAE training.
         Returns processed matrix and indices of selected HVGs.
@@ -187,13 +186,22 @@ class SingleCellDataset(Dataset):
         counts_per_cell = X.sum(axis=1, keepdims=True)
         counts_per_cell[counts_per_cell == 0] = 1
         X = X / counts_per_cell * target_sum
+        
+        # Clip at 99th percentile
+        if clip:
+            upper_clip = np.percentile(X, 99)
+            X = np.clip(X, 0, upper_clip)
 
         # Log1p transform
         X = np.log1p(X)
 
-        # Clip at 99th percentile
-        upper_clip = np.percentile(X, 99)
-        X = np.clip(X, 0, upper_clip)
+        # Gene-wise Z-score normalization
+        if normalize:
+            means = np.mean(X, axis=0, keepdims=True)
+            stds = np.std(X, axis=0, keepdims=True)
+            stds[stds == 0] = 1
+            X = ((X - means) / stds) * scale
+        
 
         return X.astype(np.float32), top_genes
 
@@ -229,7 +237,7 @@ class SingleCellDataset(Dataset):
                 if key in self.adata.obs.columns:
                     value = self.adata.obs.iloc[idx][key]
                     # Numeric obs keys to tensor, else string
-                    if pd.api.types.is_numeric_dtype(type(value)) or isinstance(value, (int, float, np.number)):
+                    if isinstance(value, (int, float, np.integer, np.floating)):
                         obs_data.append(torch.tensor(float(value), dtype=torch.float32))
                     else:
                         # Could add encoding here if needed, but just append string
