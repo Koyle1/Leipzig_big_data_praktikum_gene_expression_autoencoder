@@ -20,7 +20,7 @@ class CellVAE(nn.Module):
         )
         self.z_mean = nn.Sequential(
             nn.Linear(in_features=32, out_features=latent_dim),
-            nn.ReLU()
+            # nn.ReLU()
         )
         self.z_logvar = nn.Sequential(
             nn.Linear(in_features=32, out_features=latent_dim),

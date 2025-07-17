@@ -21,6 +21,39 @@ from autoCell.data_loader import SingleCellDataset
 import torch.nn.functional as F
 
 
+def print_latent_statistics(model, dataloader, device, num_batches=1):
+    """
+    Prints latent mean and variance statistics for the first `num_batches` of the dataloader.
+    """
+    model.eval()
+    tau0 = torch.Tensor([1.0]).to(device)
+
+    with torch.no_grad():
+        all_mu = []
+        all_var = []
+        count = 0
+
+        for data in dataloader:
+            data = data.to(device)
+            recon_batch, mu, logvar, _, _ = model(data, tau0)
+
+            all_mu.append(mu.cpu())
+            all_var.append(logvar.exp().cpu())  # Variance = exp(logvar)
+
+            count += 1
+            if count >= num_batches:
+                break
+
+    mu_all = torch.cat(all_mu, dim=0)
+    var_all = torch.cat(all_var, dim=0)
+
+    print(f"\nLatent Space Statistics (first {mu_all.shape[0]} samples):")
+    print("Mean of latent means (mu):", mu_all.mean(dim=0).numpy())
+    print("Std of latent means (mu):", mu_all.std(dim=0).numpy())
+    print("Mean of latent variances (exp(logvar)):", var_all.mean(dim=0).numpy())
+    print("Std of latent variances (exp(logvar)):", var_all.std(dim=0).numpy())
+
+
 def setup_ddp():
     dist.init_process_group(
         backend="nccl",
@@ -87,18 +120,18 @@ def train():
     batch_size = 1_000
     n_epochs = 1_000
     data_file_path = "data.h5ad"
-    n_data_samples = 10_000
+    n_data_samples = 20_000
     learning_rate = 2e-4
     scale_factor = 1.0
     latent_dim = 2
     number_of_features = 2_000
     use_variance = True
-    beta = 2e-2
+    beta = 1e-4
     vae_processing = True
     
     # New loss function hyperparameters
-    sparsity_threshold = 1e-4
-    sparsity_weight = 1.0
+    sparsity_threshold = 1e-3
+    sparsity_weight = 0.0
     value_weight = 1.0
     
     device = torch.device(f"cuda:{rank % torch.cuda.device_count()}")
@@ -175,7 +208,7 @@ def train():
                     sparsity_logits,    # sparsity_logits
                     beta=beta,     # beta (optional, has default)
                     sparsity_threshold=0.0001,  # sparsity_threshold (optional, has default)
-                    sparsity_weight=1.0,      # sparsity_weight (optional, has default)
+                    sparsity_weight=0.0,      # sparsity_weight (optional, has default)
                     value_weight=1.0          # value_weight (optional, has default)
                 )
             
@@ -221,6 +254,7 @@ def train():
     
     if rank == 0:
         evaluate_and_print_reconstructions(model.module, dataloader, device)
+        print_latent_statistics(model.module, dataloader, device, num_batches=2)
         torch.save(model.module.state_dict(), "model.pth")
         wandb.finish()
     
