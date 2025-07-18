@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import numpy as np
 import torch
+import yaml
+import argparse
+from pathlib import Path
 
 def plot_latent_scatter(
     df, x='z1', y='z2', label_col='label', ax=None, title=None, 
@@ -56,7 +59,6 @@ def print_latent_statistics(model, dataloader, device, num_batches=1):
     Prints latent mean and variance statistics for the first `num_batches` of the dataloader.
     """
     model.eval()
-    tau0 = torch.Tensor([1.0]).to(device)
 
     with torch.no_grad():
         all_mu = []
@@ -65,7 +67,7 @@ def print_latent_statistics(model, dataloader, device, num_batches=1):
 
         for data in dataloader:
             data = data.to(device)
-            recon_batch, mu, logvar = model(data, tau0)
+            recon_batch, mu, logvar = model(data)
 
             all_mu.append(mu.cpu())
             all_var.append(logvar.exp().cpu())  # Variance = exp(logvar)
@@ -85,11 +87,10 @@ def print_latent_statistics(model, dataloader, device, num_batches=1):
 
 def evaluate_and_print_reconstructions(model, dataloader, device):
     model.eval()
-    tau0 = torch.Tensor([1.0]).to(device)
     with torch.no_grad():
         data_iter = iter(dataloader)
         data = next(data_iter).to(device)
-        recon_batch, mu, logvar = model(data, tau0)
+        recon_batch, mu, logvar = model(data)
 
     print("\nTop 5 largest and smallest features (by original value) for first 10 samples:\n")
     for i in range(10):
@@ -111,3 +112,15 @@ def evaluate_and_print_reconstructions(model, dataloader, device):
             print(f"    Feature {j}: orig={orig_val:.4f}, recon={recon_val:.4f}")
         
         print("")
+
+
+def load_model_config(config_path):
+    with open(config_path, "r") as f:
+        config = yaml.safe_load(f)
+
+    # Add file name to config
+    config["config_name"] = Path(config_path).stem
+
+    # Derived hyperparameter: beta
+    config["beta"] = config["beta_normalized"] / (config["number_of_features"] / config["latent_dim"])
+    return config

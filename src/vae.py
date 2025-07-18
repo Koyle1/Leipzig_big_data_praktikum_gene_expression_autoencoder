@@ -72,10 +72,11 @@ class CellVAE(nn.Module):
         
         return self.decoder(z) 
     
-    def forward(self, x, tau0=None):
-         """
+    def forward(self, x):
+        """
             Full forward pass: encode -> sample -> decode.
         """
+        
         mu, logvar = self.encode(x)
         z = self.reparameterize(mu, logvar)
         reconstruction = self.decode(z)

@@ -1,0 +1,14 @@
+seed: 42
+batch_size: 1000
+n_epochs: 50
+data_file_path: "data/data.h5ad"
+model_save_path: "models/"
+n_data_samples: 20000
+learning_rate: 0.0002
+scale_factor: 10000
+latent_dim: 2
+number_of_features: 2000
+use_variance: true
+vae_preprocessing: true
+beta_annealing: false
+beta_normalized: 5.0

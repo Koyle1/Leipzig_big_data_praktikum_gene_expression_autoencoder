@@ -13,10 +13,12 @@ import wandb
 import os
 import socket
 import torch.distributed as dist
+import argparse
+from datetime import datetime
 
 from src.vae import CellVAE
 from src.dataloader import SingleCellDataset
-from src.utils import print_latent_statistics, evaluate_and_print_reconstructions
+from src.utils import print_latent_statistics, evaluate_and_print_reconstructions, load_model_config
 
 def setup_ddp():
     # Initialize the default process group for distributed training.
@@ -35,14 +37,15 @@ def cleanup_ddp():
     # This is important to release resources and avoid hangs at the end of training.
     dist.destroy_process_group()
 
-def train():
+def train(model_config: dict):
     # Initialize distributed data parallel (DDP)
     setup_ddp()
     rank = dist.get_rank()
     world_size = dist.get_world_size()
 
     # Set seeds for reproducibility
-    seed = 42
+    seed = model_config["seed"]
+
     torch.manual_seed(seed)
     np.random.seed(seed)
     random.seed(seed)
@@ -50,19 +53,19 @@ def train():
     torch.backends.cudnn.benchmark = True
     
     # Hyperparams
-    batch_size = 1_000
-    n_epochs = 500
-    data_file_path = "data/data.h5ad"
-    n_data_samples = 20_000
-    learning_rate = 2e-4
-    scale_factor = 10_000
-    latent_dim = 2
-    number_of_features = 2_000
-    use_variance = True
-    beta = 5.0 / (number_of_features / latent_dim)
-    vae_processing = True
-    beta_annealing = False
-
+    batch_size = model_config["batch_size"]
+    n_epochs = model_config["n_epochs"]
+    data_file_path = model_config["data_file_path"]
+    n_data_samples = model_config["n_data_samples"]
+    learning_rate = model_config["learning_rate"]
+    scale_factor = model_config["scale_factor"]
+    latent_dim = model_config["latent_dim"]
+    number_of_features = model_config["number_of_features"]
+    use_variance = model_config["use_variance"]
+    beta = model_config["beta"]
+    vae_processing = model_config["vae_preprocessing"]
+    beta_annealing = model_config["beta_annealing"]
+    
     # Set device for this process (one GPU per process)
     device = torch.device(f"cuda:{rank % torch.cuda.device_count()}")
     torch.cuda.set_device(device)
@@ -83,9 +86,6 @@ def train():
                 "vae-beta": beta,
             }
         )
-
-    # Initialize temperature
-    tau0 = torch.Tensor([1.0]).to(device)
     
     # Load and cache dataset into memory
     dataset_tmp = SingleCellDataset(
@@ -119,9 +119,9 @@ def train():
         model.train()
         sampler.set_epoch(epoch)
 
-        # (Optional) anneal beta
+        # Beta annealing across all epochs
         if beta_annealing:
-            beta_a = 0.5 * beta + 0.5 * (beta / n_epochs) * epoch
+            beta_a = (beta / n_epochs) * epoch
         else:
             beta_a = beta
         
@@ -137,7 +137,7 @@ def train():
 
             # Forward pass under mixed precision
             with autocast(device_type='cuda'):
-                recon_batch, mu, logvar = model(data, tau0) 
+                recon_batch, mu, logvar = model(data) 
                 
                 # Updated loss function call with new parameters
                 loss, RMSE, KLD = model.module.loss_function(
@@ -185,13 +185,36 @@ def train():
 
     # Final evaluation (rank 0 only)
     if rank == 0:
+        # Print information
         evaluate_and_print_reconstructions(model.module, dataloader, device)
         print_latent_statistics(model.module, dataloader, device, num_batches=2)
-        torch.save(model.module.state_dict(), "model.pth")
+
+        # Save model
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") 
+        model_save_path = os.path.join(
+            model_config["model_save_path"],
+            f"{timestamp}_{model_config['config_name']}.pth"
+        )
+        
+        torch.save(model.module.state_dict(), model_save_path)
+        
         wandb.finish()
 
      # Clean up distributed training
     cleanup_ddp()
 
+def main():
+    parser = argparse.ArgumentParser(description="Train model with YAML config")
+    parser.add_argument("--config", type=str, default="modelconfigs/example.yaml", help="Path to the YAML config file")
+    args = parser.parse_args()
+
+    config = load_model_config(args.config)
+
+    print("Loaded hyperparameters:")
+    for key, value in config.items():
+        print(f"{key}: {value}")
+
+    train(config)
+
 if __name__ == "__main__":
-    train()
+    main()
