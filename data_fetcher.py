@@ -15,7 +15,7 @@ def main():
     parser.add_argument("--cell_type", nargs="+", default=["lung"], help="Tissue types (e.g., lung kidney)")
     parser.add_argument("--sex", nargs="+", default=None, help="Donor sexes: male female")
     parser.add_argument("--disease", nargs="+", default=['normal','lung adenocarcinoma', 'squamous cell lung carcinoma', 'small cell lung carcinoma', 'non-small cell lung carcinoma', 'pleomorphic carcinoma', 'lung large cell carcinoma'], help="Diseases: COVID-19 cancer etc.")
-    parser.add_argument("--n_samples", type=int, default=20000, help="Number of cells to receive, if available")
+    parser.add_argument("--n_samples", type=int, default=60000, help="Number of cells to receive, if available")
 
     # Save Options
     parser.add_argument("--out_file", type=str, default="data/data.h5ad", help="Path to save the output AnnData file")

@@ -10,4 +10,4 @@ module load Anaconda3
 
 source activate cell-vae
 
-conda run -n cell-vae python data_fetcher2.py
+conda run -n cell-vae python data_fetcher.py
