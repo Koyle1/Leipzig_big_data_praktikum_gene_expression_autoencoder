@@ -9,6 +9,7 @@ import scanpy as sc
 
 
 class SingleCellDataset(Dataset):
+    
     def __init__(
         self,
         file_path: Union[str, Path],
@@ -27,6 +28,27 @@ class SingleCellDataset(Dataset):
         dtype: torch.dtype = torch.float32,
         use_vae_preprocessing: bool = False,
     ):
+        """
+            PyTorch-compatible dataset for single-cell RNA-seq data using AnnData format.
+    
+            Args:
+                file_path: Path to .h5ad file.
+                gene_subset: Optional list of gene names to subset.
+                cell_subset: Optional list or array of indices to subset cells.
+                obs_keys: Additional observation metadata keys to return.
+                var_keys: Additional gene metadata keys to return.
+                select_n_genes: If specified, selects top N highly variable genes.
+                transform: Optional transform to apply to each expression vector.
+                remove_outliers: Quantiles for clipping expression values (e.g., [0.01, 0.99]).
+                log_transform: Whether to apply log1p to expression data.
+                normalize: Whether to Z-score normalize gene expression.
+                scale_factor: Target total counts per cell after normalization.
+                return_labels: Whether to return a label per cell.
+                label_key: Key in `adata.obs` to use as label column.
+                dtype: Data type for expression tensors.
+                use_vae_preprocessing: Use VAE-optimized preprocessing pipeline.
+        """
+        
         self.file_path = Path(file_path)
         self.gene_subset = gene_subset
         self.cell_subset = cell_subset
@@ -50,6 +72,10 @@ class SingleCellDataset(Dataset):
         self._load_data()
 
     def _load_data(self):
+        """
+            Load and preprocess the AnnData object. Handles gene/cell subsetting, optional
+            preprocessing pipelines, and label encoding.
+        """
         self.adata = ad.read_h5ad(self.file_path)
 
         # Subset cells
@@ -75,10 +101,12 @@ class SingleCellDataset(Dataset):
         # VAE or custom preprocessing
         if self.use_vae_preprocessing:
             print("Using VAE-optimized preprocessing...")
+            
             # Preprocessing returns processed numpy array and indices of HVGs
             processed_X, hvg_indices = self.preprocess_for_vae(
                 self.adata, n_top_genes=self.select_n_genes or 3000, target_sum=self.scale_factor
             )
+            
             # Subset adata to HVGs and replace X
             self.adata = self.adata[:, hvg_indices].copy()
             self.adata.X = processed_X
@@ -109,6 +137,14 @@ class SingleCellDataset(Dataset):
         print(f"Dataset loaded: {self.adata.n_obs} cells × {self.adata.n_vars} genes")
 
     def _preprocess_expression(self):
+        """
+            Preprocessing pipeline using Scanpy:
+            - Filter cells/genes
+            - Select highly variable genes
+            - Normalize and log-transform
+            - Optional outlier clipping and Z-score scaling
+        """
+        
         # Filter based on number of expressed genes per cell
         sc.pp.filter_cells(self.adata, min_genes=1500)
     
@@ -164,8 +200,11 @@ class SingleCellDataset(Dataset):
     @staticmethod
     def preprocess_for_vae(raw_counts, n_top_genes=3000, target_sum=10000, normalize=False, scale=10, clip=False):
         """
-        Complete preprocessing pipeline optimized for VAE training.
-        Returns processed matrix and indices of selected HVGs.
+            VAE-optimized preprocessing:
+            - Selects HVGs by variance
+            - Normalizes by size factor
+            - Optionally clips, logs, and scales
+            Returns processed matrix and gene indices.
         """
         if hasattr(raw_counts, 'X'):
             X = raw_counts.X.copy()
@@ -206,9 +245,15 @@ class SingleCellDataset(Dataset):
         return X.astype(np.float32), top_genes
 
     def __len__(self):
+        """Returns the number of cells in the dataset."""
+        
         return self.n_cells
 
     def __getitem__(self, idx: int) -> Union[torch.Tensor, Tuple]:
+        """
+            Returns one data point (expression vector) and optionally label and metadata.
+        """
+        
         if idx >= self.n_cells:
             raise IndexError(f"Index {idx} out of range for dataset of size {self.n_cells}")
 
@@ -251,15 +296,34 @@ class SingleCellDataset(Dataset):
             return tuple(return_items)
 
     def get_gene_names(self) -> List[str]:
+        """
+            Returns the list of gene names.
+        """
+        
         return self.adata.var_names.tolist()
 
     def get_cell_metadata(self) -> pd.DataFrame:
+        """
+            Returns the full `.obs` metadata DataFrame.
+        """
+        
         return self.adata.obs.copy()
 
     def get_gene_metadata(self) -> pd.DataFrame:
+        """
+            Returns the full `.var` gene metadata DataFrame.
+        """
+        
         return self.adata.var.copy()
 
     def get_expression_stats(self) -> dict:
+        """
+            Returns basic statistics on the gene expression matrix:
+            - mean, std, min, max
+            - sparsity (percent zeroes)
+            - average total counts per cell
+        """
+        
         X = self.adata.X
         if hasattr(X, 'todense'):
             X = X.todense()

@@ -3,9 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class CellVAE(nn.Module):
-    """VAE Model Class with separate value and sparsity prediction heads"""
     def __init__(self, input_dim: int=512, latent_dim: int=10, use_variance: bool=False):
         super().__init__()
+        
+         # Encoder network: maps input to a hidden representation
         self.encoder = nn.Sequential(
             nn.Linear(in_features=input_dim, out_features=512),
             nn.ReLU(),
@@ -14,13 +15,18 @@ class CellVAE(nn.Module):
             nn.Linear(in_features=256, out_features=64),
             nn.ReLU()
         )
+
+        # Mean vector of the latent distribution
         self.z_mean = nn.Sequential(
             nn.Linear(in_features=64, out_features=latent_dim),
         )
+
+        # Log-variance vector of the latent distribution (optional)
         self.z_logvar = nn.Sequential(
             nn.Linear(in_features=64, out_features=latent_dim),
         ) if use_variance else None
-        
+
+        # Decoder network: reconstructs input from latent representation
         self.decoder = nn.Sequential(
             nn.Linear(in_features=latent_dim, out_features=64),
             nn.ReLU(),
@@ -31,19 +37,28 @@ class CellVAE(nn.Module):
             nn.Linear(in_features=512, out_features=input_dim),
         )
         
-        # Initialize weights
+        # Xavier initialization for weights, and bias initialized to small positive value
         for m in self.modules():
             if isinstance(m, nn.Linear):
                 nn.init.xavier_uniform_(m.weight)
                 m.bias.data.fill_(0.01)
     
     def encode(self, x):
+        """
+            Encode input into latent parameters (mu and logvar).
+        """
+        
         encoded = self.encoder(x)
         mu = self.z_mean(encoded)
         logvar = self.z_logvar(encoded) if self.z_logvar is not None else None
         return mu, logvar
     
     def reparameterize(self, mu, logvar):
+        """
+            Reparameterization trick: z = mu + std * eps
+            Allows gradient flow through stochastic sampling.
+        """
+        
         if logvar is None:
             return mu
         std = torch.exp(0.5 * logvar)
@@ -51,9 +66,16 @@ class CellVAE(nn.Module):
         return mu + eps * std
     
     def decode(self, z):
+        """
+            Decode latent vector into reconstructed input.
+        """
+        
         return self.decoder(z) 
     
     def forward(self, x, tau0=None):
+         """
+            Full forward pass: encode -> sample -> decode.
+        """
         mu, logvar = self.encode(x)
         z = self.reparameterize(mu, logvar)
         reconstruction = self.decode(z)
@@ -63,7 +85,8 @@ class CellVAE(nn.Module):
         self, recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor, logvar: torch.Tensor, beta: float = 1.0
     ):
         """
-        ELBO loss using RMSE + beta * KLD with normalization.
+            ELBO loss = RMSE + beta * KLD.
+            Uses RMSE instead of negative log-likelihood for reconstruction loss.
         """
         batch_size = x.size(0)
         
