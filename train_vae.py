@@ -15,7 +15,7 @@ import socket
 import torch.distributed as dist
 
 from src.vae import CellVAE
-from src.data_loader import SingleCellDataset
+from src.dataloader import SingleCellDataset
 from src.utils import print_latent_statistics, evaluate_and_print_reconstructions
 
 def setup_ddp():
