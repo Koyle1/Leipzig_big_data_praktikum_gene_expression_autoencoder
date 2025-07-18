@@ -1,6 +1,6 @@
 seed: 42
 batch_size: 1000
-n_epochs: 50
+n_epochs: 600
 data_file_path: "data/data.h5ad"
 model_save_path: "models/"
 n_data_samples: 20000
