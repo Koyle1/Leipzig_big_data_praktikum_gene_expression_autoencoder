@@ -4,7 +4,11 @@ import numpy as np
 import argparse
 
 def quote_values(values):
-    """Helper to format string values for use in filter expressions."""
+    """
+        Format a list of string values into a filter-compatible string for use with SOMA queries.
+        Example: ['lung', 'kidney'] -> "['lung', 'kidney']"
+    """
+    
     return "[" + ", ".join(f"'{v}'" for v in values) + "]"
 
 def main():
