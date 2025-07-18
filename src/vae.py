@@ -26,7 +26,7 @@ class CellVAE(nn.Module):
         ) if use_variance else None
         
         # Shared decoder backbone
-        self.decoder_backbone = nn.Sequential(
+        self.decoder = nn.Sequential(
             nn.Linear(in_features=latent_dim, out_features=64),
             nn.ReLU(),
             nn.Linear(in_features=64, out_features=256),
@@ -61,23 +61,23 @@ class CellVAE(nn.Module):
     
     def decode(self, z):
         # Shared decoder processing
-        decoded_features = self.decoder_backbone(z)
+        reconstruction = self.decoder(z)
         
-        # Separate predictions
-        values = self.value_head(decoded_features)
-        sparsity_logits = self.sparsity_head(decoded_features)
+        # # Separate predictions
+        # values = self.value_head(decoded_features)
+        # sparsity_logits = self.sparsity_head(decoded_features)
         
-        # Combine: values weighted by sparsity probability
-        sparsity_probs = torch.sigmoid(sparsity_logits)
-        reconstruction = values * sparsity_probs
+        # # Combine: values weighted by sparsity probability
+        # sparsity_probs = torch.sigmoid(sparsity_logits)
+        # reconstruction = values * sparsity_probs
         
-        return reconstruction, values, sparsity_logits
+        return reconstruction #, values, sparsity_logits
     
     def forward(self, x, tau0=None):
         mu, logvar = self.encode(x)
         z = self.reparameterize(mu, logvar)
-        reconstruction, values, sparsity_logits = self.decode(z)
-        return reconstruction, mu, logvar, values, sparsity_logits
+        reconstruction = self.decode(z)
+        return reconstruction, mu, logvar #, values, sparsity_logits
     
     # from torchmetrics.classification import BinaryAveragePrecision
 
@@ -161,7 +161,7 @@ class CellVAE(nn.Module):
 
             # pr_auc = 0
         
-            return total_loss, value_rmse, total_sparsity_loss, KLD, pr_auc
+            # return total_loss, value_rmse, total_sparsity_loss, KLD, pr_auc
 
     def loss_function(self, recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor, logvar: torch.Tensor, beta: float = 1.0):
         """

@@ -65,7 +65,7 @@ def print_latent_statistics(model, dataloader, device, num_batches=1):
 
         for data in dataloader:
             data = data.to(device)
-            recon_batch, mu, logvar, _, _ = model(data, tau0)
+            recon_batch, mu, logvar = model(data, tau0)
 
             all_mu.append(mu.cpu())
             all_var.append(logvar.exp().cpu())  # Variance = exp(logvar)
@@ -89,7 +89,7 @@ def evaluate_and_print_reconstructions(model, dataloader, device):
     with torch.no_grad():
         data_iter = iter(dataloader)
         data = next(data_iter).to(device)
-        recon_batch, mu, logvar, values, sparsity_logits = model(data, tau0)
+        recon_batch, mu, logvar = model(data, tau0)
 
     print("\nTop 5 largest and smallest features (by original value) for first 10 samples:\n")
     for i in range(10):
