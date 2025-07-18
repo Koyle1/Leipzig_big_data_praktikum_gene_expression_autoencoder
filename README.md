@@ -31,7 +31,7 @@ The code is specifically written for the Leipzig SC Cluster. The recommended nod
 - To fetch the data used in the experiment:  
   - Open the terminal  
   - Move to the directory where this file is contained  
-  - Run `sbatch job_files/fetch_data.job`  
+  - Run `sbatch jobfiles/fetch_data.job`  
   - The execution of the job might take a while (~20-30 min)  
 
 ---
@@ -41,7 +41,7 @@ The code is specifically written for the Leipzig SC Cluster. The recommended nod
 - To train the VAE:  
   - Open the terminal  
   - Move to the directory where this file is contained  
-  - Run `sbatch job_files/train_1GPU.job` or `sbatch job_files/train_5GPU.job`  
+  - Run `sbatch jobfiles/train_1GPU.job` or `sbatch jobfiles/train_5GPU.job`  
     (for training with either 1 GPU or 5 GPUs)  
   - Logs of the training will be stored in the `logs` folder  
   - After training, model information including weights will be saved as `model.pth`  
