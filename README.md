@@ -65,9 +65,9 @@ To present the results, a Jupyter Notebook guides users through the results of t
 
 - `src/vae.py`: contains the model architecture & loss function  
 - `train_vae.py`: contains training logic including hyperparameters for model & dataset  
-- `autocell/data_loader.py`: contains caching and preprocessing logic called by `train_vae.py`  
+- `src/dataloader.py`: contains caching and preprocessing logic called by `train_vae.py`  
 - `demo.ipynb`: contains the results in an interpretable format  
 
 ---
 
-**Authors:** Frederick Dammeier & Felix Coy (18.7.2025)
+**Authors:** Frederik Dammeier & Felix Coy (18.7.2025)
