@@ -11,29 +11,32 @@ class CellVAE(nn.Module):
     def __init__(self, input_dim: int=512, latent_dim: int=10, use_variance: bool=False):
         super().__init__()
         self.encoder = nn.Sequential(
+            # nn.Dropout(0.2),
             nn.Linear(in_features=input_dim, out_features=512),
             nn.ReLU(),
-            nn.Linear(in_features=512, out_features=128),
+            # nn.Dropout(0.2),
+            nn.Linear(in_features=512, out_features=256),
             nn.ReLU(),
-            nn.Linear(in_features=128, out_features=32),
+            # nn.Dropout(0.2),
+            nn.Linear(in_features=256, out_features=64),
             nn.ReLU()
         )
         self.z_mean = nn.Sequential(
-            nn.Linear(in_features=32, out_features=latent_dim),
+            nn.Linear(in_features=64, out_features=latent_dim),
             # nn.ReLU()
         )
         self.z_logvar = nn.Sequential(
-            nn.Linear(in_features=32, out_features=latent_dim),
-            nn.Softplus()
+            nn.Linear(in_features=64, out_features=latent_dim),
+            # nn.Softplus()
         ) if use_variance else None
         
         # Shared decoder backbone
         self.decoder_backbone = nn.Sequential(
-            nn.Linear(in_features=latent_dim, out_features=32),
+            nn.Linear(in_features=latent_dim, out_features=64),
             nn.ReLU(),
-            nn.Linear(in_features=32, out_features=128),
+            nn.Linear(in_features=64, out_features=256),
             nn.ReLU(),
-            nn.Linear(in_features=128, out_features=512),
+            nn.Linear(in_features=256, out_features=512),
             nn.ReLU(),
         )
         

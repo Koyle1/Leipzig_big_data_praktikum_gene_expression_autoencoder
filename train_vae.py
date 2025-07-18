@@ -12,11 +12,9 @@ import wandb
 import os
 import socket
 import torch.distributed as dist
-from autoCell.data_loader import SingleCellDataset
-
 
 from src.vae import CellVAE
-from autoCell.data_loader import SingleCellDataset
+from autoCell.data_loader3 import SingleCellDataset
 
 import torch.nn.functional as F
 
@@ -122,12 +120,13 @@ def train():
     data_file_path = "data.h5ad"
     n_data_samples = 20_000
     learning_rate = 2e-4
-    scale_factor = 1.0
-    latent_dim = 2
+    scale_factor = 10_000
+    latent_dim = 10
     number_of_features = 2_000
     use_variance = True
-    beta = 1e-4
+    beta = 10.0 / (number_of_features / latent_dim)
     vae_processing = True
+    beta_annealing = False
     
     # New loss function hyperparameters
     sparsity_threshold = 1e-3
@@ -145,6 +144,7 @@ def train():
                 "learning_rate": learning_rate,
                 "dataset": data_file_path,
                 "n_data_samples": n_data_samples,
+                "n_features": number_of_features,
                 "epochs": n_epochs,
                 "latent_dim": latent_dim,
                 "batch_size": batch_size,
@@ -183,6 +183,13 @@ def train():
     for epoch in range(1, n_epochs + 1):
         model.train()
         sampler.set_epoch(epoch)
+
+        # Beta annealing
+        
+        if beta_annealing:
+            beta_a = 0.5 * beta + 0.5 * (beta / n_epochs) * epoch
+        else:
+            beta_a = beta
         
         # Updated metrics tracking
         train_loss = train_value_rmse = train_sparsity_loss = train_KLD = 0
@@ -206,7 +213,7 @@ def train():
                     logvar,             # logvar
                     values,             # values
                     sparsity_logits,    # sparsity_logits
-                    beta=beta,     # beta (optional, has default)
+                    beta=beta_a,     # beta (optional, has default)
                     sparsity_threshold=0.0001,  # sparsity_threshold (optional, has default)
                     sparsity_weight=0.0,      # sparsity_weight (optional, has default)
                     value_weight=1.0          # value_weight (optional, has default)
@@ -246,8 +253,8 @@ def train():
                 "epoch": epoch,
                 "avg_loss": avg_loss,
                 "value_rmse": avg_value_rmse,
-                "sparsity_loss": avg_sparsity_loss,
-                "pr_auc": avg_sparsity_acc,
+                # "sparsity_loss": avg_sparsity_loss,
+                # "pr_auc": avg_sparsity_acc,
                 "KLD": avg_KLD,
                 "learning_rate": optimizer.param_groups[0]['lr']
             })
