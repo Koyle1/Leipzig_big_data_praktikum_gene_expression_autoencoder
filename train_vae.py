@@ -42,14 +42,14 @@ def train():
     # Hyperparams
     batch_size = 1_000
     n_epochs = 500
-    data_file_path = "data.h5ad"
+    data_file_path = "data/data.h5ad"
     n_data_samples = 20_000
     learning_rate = 2e-4
     scale_factor = 10_000
     latent_dim = 2
     number_of_features = 2_000
     use_variance = True
-    beta = 10.0 / (number_of_features / latent_dim)
+    beta = 5.0 / (number_of_features / latent_dim)
     vae_processing = True
     beta_annealing = False
     
