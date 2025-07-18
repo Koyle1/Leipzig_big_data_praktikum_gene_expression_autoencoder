@@ -204,5 +204,11 @@ __marimo__/
 
 # Logs
 wandb/
-out/
+out/*
+!out/.gitkeep
 logs/*
+!logs/.gitkeep
+models/*
+!models/.gitkeep
+data/*
+!data/.gitkeep
