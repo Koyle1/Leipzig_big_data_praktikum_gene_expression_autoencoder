@@ -15,7 +15,7 @@ import socket
 import torch.distributed as dist
 
 from src.vae import CellVAE
-from src.dataloader import SingleCellDataset
+from src.data_loader import SingleCellDataset
 from src.utils import print_latent_statistics, evaluate_and_print_reconstructions
 
 def setup_ddp():
@@ -53,11 +53,6 @@ def train():
     vae_processing = True
     beta_annealing = False
     
-    # New loss function hyperparameters
-    sparsity_threshold = 1e-3
-    sparsity_weight = 0.0
-    value_weight = 1.0
-    
     device = torch.device(f"cuda:{rank % torch.cuda.device_count()}")
     torch.cuda.set_device(device)
     
@@ -74,9 +69,6 @@ def train():
                 "latent_dim": latent_dim,
                 "batch_size": batch_size,
                 "vae-beta": beta,
-                "sparsity_threshold": sparsity_threshold,
-                "sparsity_weight": sparsity_weight,
-                "value_weight": value_weight
             }
         )
     
@@ -110,14 +102,13 @@ def train():
         sampler.set_epoch(epoch)
 
         # Beta annealing
-        
         if beta_annealing:
             beta_a = 0.5 * beta + 0.5 * (beta / n_epochs) * epoch
         else:
             beta_a = beta
         
         # Updated metrics tracking
-        train_loss = train_value_rmse = train_sparsity_loss = train_KLD = train_sparsity_acc = 0
+        train_loss = train_value_rmse = train_KLD = 0
         
         t0 = time.perf_counter()
         
@@ -127,7 +118,7 @@ def train():
                 print(f"Epoch {epoch}, batch size: {data.size(0)}")
             
             with autocast(device_type='cuda'):
-                recon_batch, mu, logvar, values, sparsity_logits = model(data, tau0) 
+                recon_batch, mu, logvar = model(data, tau0) 
                 
                 # Updated loss function call with new parameters
                 loss, RMSE, KLD = model.module.loss_function(
@@ -135,12 +126,7 @@ def train():
                     data,               # x
                     mu,                 # mu
                     logvar,             # logvar
-                    # values,             # values
-                    # sparsity_logits,    # sparsity_logits
                     beta=beta_a,     # beta (optional, has default)
-                    # sparsity_threshold=0.0001,  # sparsity_threshold (optional, has default)
-                    # sparsity_weight=0.0,      # sparsity_weight (optional, has default)
-                    # value_weight=1.0          # value_weight (optional, has default)
                 )
             
             print(f"[Rank {rank}] Model forward completed.")
@@ -153,32 +139,25 @@ def train():
             # Updated metrics accumulation
             train_loss += loss.item() * data.size(0)
             train_value_rmse += RMSE.item() * data.size(0)
-            # train_sparsity_loss += sparsity_loss.item() * data.size(0)
             train_KLD += KLD.item() * data.size(0)
-            #train_sparsity_acc += sparsity_accuracy.item() * data.size(0)
-            train_sparsity_acc = 0
         
         t1 = time.perf_counter()
         
         # Calculate averages
         avg_loss = train_loss / len(dataloader.dataset)
         avg_value_rmse = train_value_rmse / len(dataloader.dataset)
-        avg_sparsity_loss = train_sparsity_loss / len(dataloader.dataset)
         avg_KLD = train_KLD / len(dataloader.dataset)
-        avg_sparsity_acc = train_sparsity_acc / len(dataloader.dataset)
         
         if rank == 0:
             print(f"[Epoch {epoch}] Time: {t1-t0:.2f}s | Loss: {avg_loss:.4f} | "
-                  f"Value RMSE: {avg_value_rmse:.4f} | Sparsity Loss: {avg_sparsity_loss:.4f} | "
-                  f"Sparsity Acc: {avg_sparsity_acc:.4f}  | KLD: {avg_KLD:.4f}")
+                  f"Value RMSE: {avg_value_rmse:.4f} | "
+                  f"KLD: {avg_KLD:.4f}")
             
             # Updated wandb logging
             wandb.log({
                 "epoch": epoch,
                 "avg_loss": avg_loss,
                 "value_rmse": avg_value_rmse,
-                # "sparsity_loss": avg_sparsity_loss,
-                # "pr_auc": avg_sparsity_acc,
                 "KLD": avg_KLD,
                 "learning_rate": optimizer.param_groups[0]['lr']
             })
