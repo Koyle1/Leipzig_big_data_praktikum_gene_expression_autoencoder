@@ -1,154 +1,75 @@
 import cellxgene_census
 import scanpy as sc
 import numpy as np
-import gget
-import magic
-
-import scanpy.pp as pp # for preprocessing
-
 import argparse
 
-gget.setup("cellxgene")
+def quote_values(values):
+    """Helper to format string values for use in filter expressions."""
+    return "[" + ", ".join(f"'{v}'" for v in values) + "]"
 
-#help(gget.cellxgene)
 def main():
-    parser = argparse.ArgumentParser(description="Specify your data")
+    parser = argparse.ArgumentParser(description="Fetch cellxgene data based on user parameters")
 
-    #Data Options
-    parser.add_argument("--species", type=str, default="Homo sapiens", help="Specify the species of the organism")
-    parser.add_argument("--cell_type", type=str, default="Neuron", help="Specify the cell type")
-    parser.add_argument("--sex", type=str, default=None, help="Choose the sex of the cell donor")
-    parser.add_argument("--disease", type=str, default="COVID-19", help="Choose the desease of the target")
+    # Data Options (allowing multiple values)
+    parser.add_argument("--species", type=str, default="Homo sapiens", help="Species name (currently only Homo sapiens is supported)")
+    parser.add_argument("--cell_type", nargs="+", default=["lung"], help="Tissue types (e.g., lung kidney)")
+    parser.add_argument("--sex", nargs="+", default=None, help="Donor sexes: male female")
+    parser.add_argument("--disease", nargs="+", default=['normal','lung adenocarcinoma', 'squamous cell lung carcinoma', 'small cell lung carcinoma', 'non-small cell lung carcinoma', 'pleomorphic carcinoma', 'lung large cell carcinoma'], help="Diseases: COVID-19 cancer etc.")
+    parser.add_argument("--n_samples", type=int, default=20000, help="Number of cells to receive, if available")
 
-    # Preprocessing options
-    parser.add_argument("--num_genes", type=int, default=None, help="Top N highly variable genes to keep")
-    parser.add_argument("--filter_cells_min_genes", type=int, default=None, help="Minimum genes per cell")
-    parser.add_argument("--filter_genes_min_cells", type=int, default=None, help="Minimum cells per gene")
-    parser.add_argument("--normalize", action="store_true", help="Apply total-count normalization")
-    parser.add_argument("--log1p", action="store_true", help="Log1p transform the data")
-    parser.add_argument("--sqrt", action="store_true", help="Square-root transform the data (alternative to log1p)")
-    parser.add_argument("--scale", action="store_true", help="Scale to zero mean and unit variance")
-    parser.add_argument("--regress_out", nargs="+", default=None, help="Regress out confounding variables (e.g. 'total_counts', 'pct_counts_mt')")
-    parser.add_argument("--run_pca", action="store_true", help="Run PCA")
-    parser.add_argument("--n_pcs", type=int, default=50, help="Number of PCs to compute (used in PCA)")
-    parser.add_argument("--run_neighbors", action="store_true", help="Compute neighbors after PCA")
-    parser.add_argument("--subsample", type=float, default=None, help="Fraction of cells to subsample (0 < x < 1)")
-    parser.add_argument("--downsample_counts", type=int, default=None, help="Downsample total counts per cell to this value")
-    parser.add_argument("--combat", action="store_true", help="Apply batch correction using ComBat (requires 'batch' in adata.obs)")
-    parser.add_argument("--magic", action="store_true", help="Apply MAGIC imputation (requires magic package)")
+    # Save Options
+    parser.add_argument("--out_file", type=str, default="data/data.h5ad", help="Path to save the output AnnData file")
 
-    #Save options
-    parser.add_argument("--save_name", type=str, default="data", help="Name of the save file")
-    
     args = parser.parse_args()
 
-    #Data Extraction
-    adata = gget.cellxgene(
-        species = "homo_sapiens",
-        disease= ["lung_cancer"],
-        tissue="lung",
-        meta_only=True,
-        #dataset_id="e04daea4-4412-45b5-989e-76a9be070a89"
-    )
+    species_key = args.species.lower().replace(" ", "_")
 
-    #Preprocessing
-    if args.filter_cells_min_genes:
-        pp.filter_cells(adata, min_genes=args.filter_cells_min_genes)
-        
-    if args.filter_genes_min_cells:
-        pp.filter_genes(adata, min_cells=args.filter_genes_min_cells)
-    
-    if args.num_genes is not None:
-        pp.highly_variable_genes(adata, n_top_genes= args.num_genes, subset=True)
+    print("Opening cellxgene census...")
+    with cellxgene_census.open_soma() as census:
+        filters = ["is_primary_data == True"]
 
-    if args.subsample:
-        pp.subsample(adata, fraction=args.subsample)
-        
-    if args.downsample_counts:
-        pp.downsample_counts(adata, counts_per_cell=args.downsample_counts)
-        
-    if args.num_genes:
-        pp.highly_variable_genes(adata, n_top_genes=args.num_genes, subset=True)
-        
-    if args.normalize:
-        pp.normalize_total(adata, target_sum=1e4)
-        
-    if args.log1p:
-        pp.log1p(adata)
-        
-    elif args.sqrt:
-        pp.sqrt(adata)
-        
-    if args.regress_out:
-        pp.regress_out(adata, args.regress_out)
-        
-    if args.scale:
-        pp.scale(adata)
+        # Cell type
+        if args.cell_type:
+            filters.append(f"tissue_general in {quote_values(args.cell_type)}")
 
-    if args.run_pca:
-        pp.pca(adata, n_comps=args.n_pcs)
+        # Sex
+        if args.sex:
+            filters.append(f"sex in {quote_values(args.sex)}")
 
-    if args.run_neighbors:
-        pp.neighbors(adata, n_pcs=args.n_pcs)
+        # Disease
+        if args.disease:
+            filters.append(f"disease in {quote_values(args.disease)}")
 
-    if args.combat:
-        if "batch" not in adata.obs:
-            raise ValueError("ComBat requires 'batch' column in adata.obs.")
-        pp.combat(adata, key="batch")
+        full_filter = " and ".join(filters)
+        print(f"Using filter: {full_filter}")
+        print("Fetching observation metadata...")
 
-    if args.magic:
-        adata = magic.MAGIC().fit_transform(adata)
-        
-    #Save the extracted data
-    adata.to_csv('file1.csv')
-    print(adata.describe())
-    print(adata.head())
-    print(adata.size)
-    print(f"N normal cells {adata[adata['disease']=="normal"].size}")
-    print(f"N cancer cells {adata[adata['disease']=="lung cancer"].size}")
-    #adata.write(args.save_name + ".h5ad")
-    print("Data saved to 'processed_data.h5ad'")
+        obs_df = census["census_data"][species_key].obs.read(
+            value_filter=full_filter
+        ).concat().to_pandas()
 
-    import cellxgene_census
-import scanpy.pp as pp
+        print(f"Total matching cells: {len(obs_df)}")
+        if obs_df.empty:
+            print("No matching cells found with the given filters.")
+            return
 
-import anndata
-import pandas as pd
+        # Sample (or not)
+        sample_size = min(args.n_samples, len(obs_df))
+        df_sample = obs_df.sample(n=sample_size, random_state=42)
+        ids_str = "[" + ",".join(str(i) for i in df_sample["soma_joinid"].tolist()) + "]"
 
+        print(f"Downloading {sample_size} cells...")
 
-with cellxgene_census.open_soma() as census:
+        adata = cellxgene_census.get_anndata(
+            census=census,
+            organism=args.species,
+            obs_value_filter=f"soma_joinid in {ids_str}",
+            obs_column_names=["tissue", "disease", "sex", "cell_type", "tissue_general"],
+        )
 
-    obs_df = census["census_data"]["homo_sapiens"].obs.read(
-        value_filter = "tissue_general == 'lung' and disease in ['normal','lung adenocarcinoma', 'squamous cell lung carcinoma', 'small cell lung carcinoma', 'non-small cell lung carcinoma', 'pleomorphic carcinoma', 'lung large cell carcinoma'] and is_primary_data == True",
-    ).concat().to_pandas() # Used for data exploration
-
-    unique_values = obs_df["disease"].unique()
-    for value in unique_values:
-        print(value)
-
-    columns = obs_df.columns
-    for column in columns:
-        print(column)
-
-    df_sample = obs_df.sample(n=50_000, random_state=42)
-    ids = df_sample['soma_joinid']
-    ids_list = ids.tolist()
-    ids_str = "[" + ",".join(str(i) for i in ids_list) + "]"
-
-    print("indices sampled, starting download...")
-
-    adata = cellxgene_census.get_anndata(
-        census = census,
-        organism = "Homo sapiens",
-        obs_value_filter = f"soma_joinid in {ids_str}",
-        obs_column_names=["tissue", "disease"],
-    )
-
-    print("download finished")
-    # pp.filter_genes_dispersion(adata)
-    # pp.highly_variable_genes(adata, n_top_genes=50, subset=True)
-    
-    adata.write("data.h5ad")
+        print(f"Download complete. Writing to {args.out_file}...")
+        adata.write(args.out_file)
+        print("Done.")
 
 if __name__ == "__main__":
     main()
