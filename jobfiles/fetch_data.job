@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=32G
+#SBATCH --job-name=data_fetcher
+#SBATCH --output=logs/%x%j.out
+#SBATCH --time=10:00:00  # max running time
+
+module load Anaconda3
+
+source activate cell-vae
+
+conda run -n cell-vae python data_fetcher.py
