@@ -1,7 +1,0 @@
-	linux-vdso.so.1 (0x00007ffc9e3eb000)
-	libpthread.so.0 => /lib64/libpthread.so.0 (0x0000150ce1c66000)
-	libdl.so.2 => /lib64/libdl.so.2 (0x0000150ce1c61000)
-	libutil.so.1 => /lib64/libutil.so.1 (0x0000150ce1c5c000)
-	libm.so.6 => /lib64/libm.so.6 (0x0000150ce1b81000)
-	libc.so.6 => /lib64/libc.so.6 (0x0000150ce1800000)
-	/lib64/ld-linux-x86-64.so.2 (0x0000150ce2001000)
