@@ -41,7 +41,7 @@ def train():
     
     # Hyperparams
     batch_size = 1_000
-    n_epochs = 50
+    n_epochs = 500
     data_file_path = "data.h5ad"
     n_data_samples = 20_000
     learning_rate = 2e-4
@@ -117,8 +117,7 @@ def train():
             beta_a = beta
         
         # Updated metrics tracking
-        train_loss = train_value_rmse = train_sparsity_loss = train_KLD = 0
-        train_sparsity_acc = 0
+        train_loss = train_value_rmse = train_sparsity_loss = train_KLD = train_sparsity_acc = 0
         
         t0 = time.perf_counter()
         
@@ -131,17 +130,17 @@ def train():
                 recon_batch, mu, logvar, values, sparsity_logits = model(data, tau0) 
                 
                 # Updated loss function call with new parameters
-                loss, value_rmse, sparsity_loss, KLD, sparsity_accuracy = model.module.loss_function(
+                loss, RMSE, KLD = model.module.loss_function(
                     recon_batch,        # recon_x
                     data,               # x
                     mu,                 # mu
                     logvar,             # logvar
-                    values,             # values
-                    sparsity_logits,    # sparsity_logits
+                    # values,             # values
+                    # sparsity_logits,    # sparsity_logits
                     beta=beta_a,     # beta (optional, has default)
-                    sparsity_threshold=0.0001,  # sparsity_threshold (optional, has default)
-                    sparsity_weight=0.0,      # sparsity_weight (optional, has default)
-                    value_weight=1.0          # value_weight (optional, has default)
+                    # sparsity_threshold=0.0001,  # sparsity_threshold (optional, has default)
+                    # sparsity_weight=0.0,      # sparsity_weight (optional, has default)
+                    # value_weight=1.0          # value_weight (optional, has default)
                 )
             
             print(f"[Rank {rank}] Model forward completed.")
@@ -153,8 +152,8 @@ def train():
             
             # Updated metrics accumulation
             train_loss += loss.item() * data.size(0)
-            train_value_rmse += value_rmse.item() * data.size(0)
-            train_sparsity_loss += sparsity_loss.item() * data.size(0)
+            train_value_rmse += RMSE.item() * data.size(0)
+            # train_sparsity_loss += sparsity_loss.item() * data.size(0)
             train_KLD += KLD.item() * data.size(0)
             #train_sparsity_acc += sparsity_accuracy.item() * data.size(0)
             train_sparsity_acc = 0
