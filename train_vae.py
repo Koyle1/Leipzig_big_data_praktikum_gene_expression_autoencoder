@@ -8,49 +8,15 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data import DataLoader, DistributedSampler
 from torch.optim import RMSprop
 from torch.amp import autocast,GradScaler
+import torch.nn.functional as F
 import wandb
 import os
 import socket
 import torch.distributed as dist
 
 from src.vae import CellVAE
-from autoCell.data_loader3 import SingleCellDataset
-
-import torch.nn.functional as F
-
-
-def print_latent_statistics(model, dataloader, device, num_batches=1):
-    """
-    Prints latent mean and variance statistics for the first `num_batches` of the dataloader.
-    """
-    model.eval()
-    tau0 = torch.Tensor([1.0]).to(device)
-
-    with torch.no_grad():
-        all_mu = []
-        all_var = []
-        count = 0
-
-        for data in dataloader:
-            data = data.to(device)
-            recon_batch, mu, logvar, _, _ = model(data, tau0)
-
-            all_mu.append(mu.cpu())
-            all_var.append(logvar.exp().cpu())  # Variance = exp(logvar)
-
-            count += 1
-            if count >= num_batches:
-                break
-
-    mu_all = torch.cat(all_mu, dim=0)
-    var_all = torch.cat(all_var, dim=0)
-
-    print(f"\nLatent Space Statistics (first {mu_all.shape[0]} samples):")
-    print("Mean of latent means (mu):", mu_all.mean(dim=0).numpy())
-    print("Std of latent means (mu):", mu_all.std(dim=0).numpy())
-    print("Mean of latent variances (exp(logvar)):", var_all.mean(dim=0).numpy())
-    print("Std of latent variances (exp(logvar)):", var_all.std(dim=0).numpy())
-
+from src.dataloader import SingleCellDataset
+from src.utils import print_latent_statistics, evaluate_and_print_reconstructions
 
 def setup_ddp():
     dist.init_process_group(
@@ -61,47 +27,6 @@ def setup_ddp():
 
 def cleanup_ddp():
     dist.destroy_process_group()
-
-def loss_function(self, recon_x: torch.Tensor, x: torch.Tensor, mu: torch.Tensor, logvar: torch.Tensor, beta: float = 0.0):
-        """
-        ELBO loss using RMSE + beta * KLD.
-        """
-        if logvar is None:
-            logvar = torch.ones_like(mu)
-
-        mse = F.mse_loss(recon_x, x, reduction='mean')
-        rmse = torch.sqrt(mse)
-        KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-        return rmse + beta * KLD, rmse, KLD
-
-def evaluate_and_print_reconstructions(model, dataloader, device):
-    model.eval()
-    tau0 = torch.Tensor([1.0]).to(device)
-    with torch.no_grad():
-        data_iter = iter(dataloader)
-        data = next(data_iter).to(device)
-        recon_batch, mu, logvar, values, sparsity_logits = model(data, tau0)
-
-    print("\nTop 5 largest and smallest features (by original value) for first 10 samples:\n")
-    for i in range(10):
-        orig = data[i]
-        recon = recon_batch[i]
-        values = [(j, orig[j].item(), recon[j].item()) for j in range(orig.shape[0])]
-
-        # Sort by original value
-        sorted_vals = sorted(values, key=lambda x: x[1])
-
-        print(f"Sample {i}:")
-
-        print("  Smallest 5 features:")
-        for j, orig_val, recon_val in sorted_vals[:5]:
-            print(f"    Feature {j}: orig={orig_val:.4f}, recon={recon_val:.4f}")
-
-        print("  Largest 5 features:")
-        for j, orig_val, recon_val in sorted_vals[-5:][::-1]:  # reversed to show largest first
-            print(f"    Feature {j}: orig={orig_val:.4f}, recon={recon_val:.4f}")
-        
-        print("")
 
 def train():
     setup_ddp()
@@ -116,12 +41,12 @@ def train():
     
     # Hyperparams
     batch_size = 1_000
-    n_epochs = 1_000
+    n_epochs = 50
     data_file_path = "data.h5ad"
     n_data_samples = 20_000
     learning_rate = 2e-4
     scale_factor = 10_000
-    latent_dim = 10
+    latent_dim = 2
     number_of_features = 2_000
     use_variance = True
     beta = 10.0 / (number_of_features / latent_dim)
